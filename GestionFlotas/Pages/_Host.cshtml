@@ -1,0 +1,35 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Web
+@namespace GestionFlotas.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en" :dir="$store.app.direction" x-data="{ direction: $store.app.direction }" x-bind:dir="direction" class="group/item" :data-mode="$store.app.mode" :data-sidebar="$store.app.sidebarMode">
+<head>
+ 
+    <meta charset="utf-8">
+    <title>Index | Sliced - Tailwind CSS Admin & Dashboard Template</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Tailwind CSS Admin & Dashboard Template" name="description">
+    <meta content="SRBThemes" name="author">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="data:image/x-icon;base64,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">
+    <script type="module" crossorigin src="./assets/main-a49b4ec4.js"></script>
+    <link rel="stylesheet" href="./assets/css/main.css">
+
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+</head>
+<body x-data="main" x-init="$store.app.hasCreative = window.location.href.includes('creative.html') , $store.app.hasdetached = window.location.href.includes('detached.html')" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.fullscreen ? 'full' : '' , $store.app.hasCreative ? 'detached ' : '' , $store.app.hasdetached ? 'detached detached-simple ' : '' , $store.app.layout  ]" class="relative overflow-x-hidden text-sm antialiased font-normal text-black font-cerebri dark:text-white vertical " x-data="modals">
+
+    <component type="typeof(App)" render-mode="Server" />
+
+    <script src="_framework/blazor.server.js"></script>
+
+
+    <script src="assets/libs/@@alpinejs/persist/cdn.min.js"></script>
+    <script src="assets/libs/@@alpinejs/collapse/cdn.min.js"></script>
+    <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/js/pages/appexchart-app.js"></script>
+
+</body>
+</html>

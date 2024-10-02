@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionFlotas", "GestionFlotas\GestionFlotas.csproj", "{5E390635-8553-42FD-9E2D-0FCD5DBD9882}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestionFlotas", "GestionFlotas\GestionFlotas.csproj", "{5E390635-8553-42FD-9E2D-0FCD5DBD9882}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionFlotas.dataaccess", "GestionFlotas.dataaccess\GestionFlotas.dataaccess.csproj", "{A6A20290-7954-4A66-8586-86894A9D6E39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestionFlotas.dataaccess", "GestionFlotas.dataaccess\GestionFlotas.dataaccess.csproj", "{A6A20290-7954-4A66-8586-86894A9D6E39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionFlotas.model", "GestionFlotas.model\GestionFlotas.model.csproj", "{F6BD991F-EC48-4BEC-AB25-7F4740B7436E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestionFlotas.model", "GestionFlotas.model\GestionFlotas.model.csproj", "{F6BD991F-EC48-4BEC-AB25-7F4740B7436E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestionFlotas.business", "GestionFlotas.business\GestionFlotas.business.csproj", "{213FA2A9-04BE-459A-A809-A0C98B3E7014}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GestionFlotas.business", "GestionFlotas.business\GestionFlotas.business.csproj", "{213FA2A9-04BE-459A-A809-A0C98B3E7014}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,15 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/GestionFlotas/bin/Debug/net8.0
+/GestionFlotas/obj
+/GestionFlotas.business/bin/Debug/net8.0
+/GestionFlotas.business/obj
+/GestionFlotas.dataaccess/bin/Debug/net8.0
+/GestionFlotas.dataaccess/obj/Debug/net8.0
+/GestionFlotas.dataaccess/obj
+/GestionFlotas.model/bin/Debug/net8.0
+/GestionFlotas.model/obj/Debug/net8.0
+/GestionFlotas.model/obj
+/.vs/GestionFlotas

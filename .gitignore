@@ -17,3 +17,8 @@
 /.vs/ProjectEvaluation
 /GestionFlotas.business/obj
 /.vs
+/GestionFlotas/bin/Debug/net7.0
+/GestionFlotas.business/bin/Debug/net7.0
+/GestionFlotas.business/bin/Debug/net7.0/GestionFlotas.business.deps.json
+/GestionFlotas.dataaccess/bin/Debug/net7.0
+/GestionFlotas.model/bin/Debug/net7.0

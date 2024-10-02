@@ -13,7 +13,10 @@ namespace GestionFlotas
             // Add services to the container.
             builder.Services.AddRazorPages();
             builder.Services.AddServerSideBlazor();
-            
+
+
+            builder.WebHost.UseWebRoot("wwwroot");
+            builder.WebHost.UseStaticWebAssets();
 
             var app = builder.Build();
 

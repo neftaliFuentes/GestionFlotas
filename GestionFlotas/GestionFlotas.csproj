@@ -12,4 +12,9 @@
     <ProjectReference Include="..\GestionFlotas.model\GestionFlotas.model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\ConsultaReportes\" />
+    <Folder Include="Pages\Procesos\" />
+  </ItemGroup>
+
 </Project>

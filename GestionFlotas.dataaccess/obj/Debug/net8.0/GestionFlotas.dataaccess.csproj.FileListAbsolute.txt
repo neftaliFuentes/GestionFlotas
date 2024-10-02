@@ -1,0 +1,14 @@
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\bin\Debug\net8.0\GestionFlotas.dataaccess.deps.json
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\bin\Debug\net8.0\GestionFlotas.dataaccess.runtimeconfig.json
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\bin\Debug\net8.0\GestionFlotas.dataaccess.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\bin\Debug\net8.0\GestionFlotas.dataaccess.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.csproj.AssemblyReference.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.GeneratedMSBuildEditorConfig.editorconfig
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.AssemblyInfoInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.AssemblyInfo.cs
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.csproj.CoreCompileInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\refint\GestionFlotas.dataaccess.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\GestionFlotas.dataaccess.genruntimeconfig.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.dataaccess\obj\Debug\net8.0\ref\GestionFlotas.dataaccess.dll

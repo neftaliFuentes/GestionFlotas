@@ -1,0 +1,11 @@
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\bin\Debug\net8.0\GestionFlotas.model.deps.json
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\bin\Debug\net8.0\GestionFlotas.model.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\bin\Debug\net8.0\GestionFlotas.model.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.GeneratedMSBuildEditorConfig.editorconfig
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.AssemblyInfoInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.AssemblyInfo.cs
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.csproj.CoreCompileInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\refint\GestionFlotas.model.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\GestionFlotas.model.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.model\obj\Debug\net8.0\ref\GestionFlotas.model.dll

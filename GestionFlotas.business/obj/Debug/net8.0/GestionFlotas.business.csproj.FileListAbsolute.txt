@@ -1,0 +1,17 @@
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.business.deps.json
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.business.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.business.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.GeneratedMSBuildEditorConfig.editorconfig
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.AssemblyInfoInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.AssemblyInfo.cs
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.csproj.CoreCompileInputs.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\refint\GestionFlotas.business.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\ref\GestionFlotas.business.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.dataaccess.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.model.dll
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.dataaccess.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\bin\Debug\net8.0\GestionFlotas.model.pdb
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionFlotas.business.csproj.AssemblyReference.cache
+Z:\Desarrollos Personales\CIA-NF\gestionFlotas\GestionFlotas\GestionFlotas.business\obj\Debug\net8.0\GestionF.850B5FD0.Up2Date

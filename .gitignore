@@ -6,6 +6,7 @@
 /GestionFlotas/obj
 /GestionFlotas.business/bin/Debug/net8.0
 /GestionFlotas.business/obj
+/GestionFlotas.business/obj/Debug/net8.0
 /GestionFlotas.dataaccess/bin/Debug/net8.0
 /GestionFlotas.dataaccess/obj/Debug/net8.0
 /GestionFlotas.dataaccess/obj
@@ -14,4 +15,5 @@
 /GestionFlotas.model/obj
 /.vs/GestionFlotas
 /.vs/ProjectEvaluation
+/GestionFlotas.business/obj
 /.vs

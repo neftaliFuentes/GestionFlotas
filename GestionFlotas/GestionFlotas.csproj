@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.20" />
+    <PackageReference Include="Radzen.Blazor" Version="5.2.8" />
   </ItemGroup>
 
 </Project>

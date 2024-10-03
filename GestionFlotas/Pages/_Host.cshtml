@@ -23,6 +23,10 @@
     <script type="module" crossorigin src="~/assets/main-a49b4ec4.js"></script>
     <link rel="stylesheet" href="~/assets/css/main.css">
 
+    <script async src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/material-base.css">
+    <script asp-add-nonce="true" src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
+
     <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
 </head>
 <body x-data="main" x-init="$store.app.hasCreative = window.location.href.includes('creative.html') , $store.app.hasdetached = window.location.href.includes('detached.html')" :class="[ $store.app.sidebar ? 'toggle-sidebar' : '', $store.app.fullscreen ? 'full' : '' , $store.app.hasCreative ? 'detached ' : '' , $store.app.hasdetached ? 'detached detached-simple ' : '' , $store.app.layout  ]" class="relative overflow-x-hidden text-sm antialiased font-normal text-black font-cerebri dark:text-white vertical " x-data="modals">
@@ -31,13 +35,14 @@
    
     <script asp-add-nonce="true" src="_framework/blazor.server.js"></script>
        
- 
-   
     <script asp-add-nonce="true" src="~/assets/libs/@@alpinejs/persist/cdn.min.js"></script>
     <script asp-add-nonce="true" src="~/assets/libs/@@alpinejs/collapse/cdn.min.js"></script>
     <script asp-add-nonce="true" src="~/assets/libs/apexcharts/apexcharts.min.js"></script>
     <script asp-add-nonce="true" src="~/assets/js/pages/appexchart-app.js"></script>
      
+    <script asp-add-nonce="true" src="~/_content/radzen.blazor.gridexportoptions/radzen-grid-export-options.js"></script>
+    <script asp-add-nonce="true" src="~/_content/radzen.blazor.gridexportoptions/xlsx.full.min.js"></script>
+    <script asp-add-nonce="true" src="~/_content/radzen.blazor.gridexportoptions/luxon.min.js"></script>
   
 </body>
 </html>

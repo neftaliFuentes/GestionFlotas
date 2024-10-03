@@ -1,6 +1,7 @@
  
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Radzen;
 
 namespace GestionFlotas
 {
@@ -18,7 +19,9 @@ namespace GestionFlotas
             builder.WebHost.UseWebRoot("wwwroot");
             builder.WebHost.UseStaticWebAssets();
 
-            var app = builder.Build();
+			builder.Services.AddRadzenComponents();
+
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

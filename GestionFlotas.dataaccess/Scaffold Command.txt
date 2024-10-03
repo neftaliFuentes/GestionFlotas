@@ -1,11 +1,12 @@
 ﻿First run
 ---------
-Scaffold-DbContext "Data Source=LOCALHOST\\SQLEXPRESS01;DATABASE=bdGestionDeFlotas;Integrated Security=True;" Microsoft.EntityFrameworkCore.SqlServer -Context "ContextGestionFlotas" -NoOnConfiguring -NoPluralize -Schema "dbo"
-
-
+Scaffold-DbContext "Data Source=W11CINOSTROZAA\SQLEXPRESS01;Initial Catalog=bdGestionDeFlotas;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -Context "ContextGestionFlotas" -NoOnConfiguring -NoPluralize -Schema "dbo"
 
 
 
 For Update Model
 ----------------
-Scaffold-DbContext "Server=192.168.210.243;Database=SentinelPlatform;User=sa;Password=C0nect1va;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -Context "SentinelModulesContext" -NoOnConfiguring -NoPluralize -Schema "PlanesSeguridad" -force
+Scaffold-DbContext "Data Source=W11CINOSTROZAA\SQLEXPRESS01;Initial Catalog=bdGestionDeFlotas;Integrated Security=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -Context "ContextGestionFlotas" -NoOnConfiguring -NoPluralize -Schema "dbo" -force
+
+
+-- Scaffold-DbContext "Server=192.168.210.243;Database=SentinelPlatform;User=sa;Password=C0nect1va;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -Context "SentinelModulesContext" -NoOnConfiguring -NoPluralize -Schema "PlanesSeguridad" -force

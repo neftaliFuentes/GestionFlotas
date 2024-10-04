@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GestionFlotas.dataaccess;
 
-public partial class ContextGestionFlotas : DbContext
+public partial class FlotasContext : DbContext
 {
-    public ContextGestionFlotas(DbContextOptions<ContextGestionFlotas> options)
+    public FlotasContext(DbContextOptions<FlotasContext> options)
         : base(options)
     {
     }

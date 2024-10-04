@@ -25,9 +25,9 @@
 	<!-- Start All Card -->
 
 	<div class="card">
-		@* <RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start">
+		<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start">
 		<RadzenButton ButtonStyle="Radzen.ButtonStyle.Primary" ButtonType="Radzen.ButtonType.Button" Icon="add_circle_outline" Text="Nuevo" Variant="Radzen.Variant.Flat" Style="margin: 10px" Click="@(() => EditarForm(new TbVehiculoTipoModel()))" />
-		</RadzenStack> *@
+		</RadzenStack>
 
 		<div x-data="modals">
 			<button type="button" class="btn flex items-center gap-1.5 bg-purple border-purple text-white hover:bg-purple/[0.85] hover:border-purple/[0.85]"
@@ -38,7 +38,7 @@
 				Nuevo
 			</button>
 			<br />
-			<div class="fixed inset-0 bg-black/80 z-[99999] hidden overflow-y-auto dark:bg-dark/90" :class="open &amp;&amp; '!block'">
+			<div class="fixed inset-0 bg-black/80 z-[99999] hidden overflow-y-auto dark:bg-dark/90" :class="open &amp;&amp; '!display'">
 				<div class="flex items-start justify-center min-h-screen px-4" @click.self="open = false">
 					<div x-show="open" x-transition="" x-transition.duration.300="" class="relative w-full max-w-5xl p-0 my-8 overflow-hidden bg-white border rounded-lg shadow-3xl border-black/10 dark:bg-darklight dark:border-darkborder" style="display: none;">
 						<div class="flex items-center justify-between px-5 py-3 bg-white border-b border-black/10 dark:bg-darklight dark:border-darkborder">
@@ -97,7 +97,7 @@
 		</div>
 	</div>
 
-	@* <Modal @ref="modal" Title="Crear/Editar" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
+	<Modal @ref="modal" Title="Crear/Editar" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
 	<BodyTemplate>
 	<RadzenTemplateForm TItem="TbVehiculoTipoModel" Data="@TipoVehiculoSelecionado" Submit="OnSubmit">
 	<RadzenRow Style="padding: 5px">
@@ -123,7 +123,7 @@
 	</RadzenTemplateForm>
 
 	</BodyTemplate>
-	</Modal> *@
+	</Modal>
 </div>
 
 

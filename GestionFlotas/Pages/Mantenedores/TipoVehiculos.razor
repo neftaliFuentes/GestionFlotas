@@ -6,11 +6,13 @@
 @using GestionFlotas.dataaccess
 @using GestionFlotas.model
 @using Microsoft.EntityFrameworkCore;
-@using System.Linq.Dynamic.Core
+@using System.Linq.Dynamic.Core;
+@using Radzen;
 
 @inject IDbContextFactory<FlotasContext> ContextFactoryGestionFlotas
 @inject NotificationService NotificationService
 @inject DialogService DialogService
+@inject IJSRuntime JSRuntime
 
 <div class="h-[calc(100vh-60px)]  relative overflow-y-auto overflow-x-hidden p-4 space-y-4 detached-content">
 
@@ -23,9 +25,43 @@
 	<!-- Start All Card -->
 
 	<div class="card">
-		<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start">
-			<RadzenButton ButtonStyle="Radzen.ButtonStyle.Primary" ButtonType="Radzen.ButtonType.Button" Icon="add_circle_outline" Text="Nuevo" Variant="Radzen.Variant.Flat" Style="margin: 10px" Click="@(() => EditarForm(new TbVehiculoTipoModel()))" />
-		</RadzenStack>
+		@* <RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start">
+		<RadzenButton ButtonStyle="Radzen.ButtonStyle.Primary" ButtonType="Radzen.ButtonType.Button" Icon="add_circle_outline" Text="Nuevo" Variant="Radzen.Variant.Flat" Style="margin: 10px" Click="@(() => EditarForm(new TbVehiculoTipoModel()))" />
+		</RadzenStack> *@
+
+		<div x-data="modals">
+			<button type="button" class="btn flex items-center gap-1.5 bg-purple border-purple text-white hover:bg-purple/[0.85] hover:border-purple/[0.85]"
+					@click="toggle">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 mx-auto">
+					<path d="M22 20H2V18H3V11.0314C3 6.04348 7.02944 2 12 2C16.9706 2 21 6.04348 21 11.0314V18H22V20ZM5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z" fill="currentColor"></path>
+				</svg>
+				Nuevo
+			</button>
+			<br />
+			<div class="fixed inset-0 bg-black/80 z-[99999] hidden overflow-y-auto dark:bg-dark/90" :class="open &amp;&amp; '!block'">
+				<div class="flex items-start justify-center min-h-screen px-4" @click.self="open = false">
+					<div x-show="open" x-transition="" x-transition.duration.300="" class="relative w-full max-w-5xl p-0 my-8 overflow-hidden bg-white border rounded-lg shadow-3xl border-black/10 dark:bg-darklight dark:border-darkborder" style="display: none;">
+						<div class="flex items-center justify-between px-5 py-3 bg-white border-b border-black/10 dark:bg-darklight dark:border-darkborder">
+							<h5 class="text-lg font-semibold dark:text-white">Extra Large Modal</h5>
+							<button type="button" class="text-muted hover:text-black dark:hover:text-white" @click="toggle">
+								<svg class="w-5 h-5" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M24.2929 6.29289L6.29289 24.2929C6.10536 24.4804 6 24.7348 6 25C6 25.2652 6.10536 25.5196 6.29289 25.7071C6.48043 25.8946 6.73478 26 7 26C7.26522 26 7.51957 25.8946 7.70711 25.7071L25.7071 7.70711C25.8946 7.51957 26 7.26522 26 7C26 6.73478 25.8946 6.48043 25.7071 6.29289C25.5196 6.10536 25.2652 6 25 6C24.7348 6 24.4804 6.10536 24.2929 6.29289Z" fill="currentcolor"></path>
+									<path d="M7.70711 6.29289C7.51957 6.10536 7.26522 6 7 6C6.73478 6 6.48043 6.10536 6.29289 6.29289C6.10536 6.48043 6 6.73478 6 7C6 7.26522 6.10536 7.51957 6.29289 7.70711L24.2929 25.7071C24.4804 25.8946 24.7348 26 25 26C25.2652 26 25.5196 25.8946 25.7071 25.7071C25.8946 25.5196 26 25.2652 26 25C26 24.7348 25.8946 24.4804 25.7071 24.2929L7.70711 6.29289Z" fill="currentcolor"></path>
+								</svg>
+							</button>
+						</div>
+						<div class="p-5 space-y-4">
+							<div class="text-black dark:text-muted">
+								ssdfsdffsdfsdfsdf
+							</div>
+							<div class="flex items-center justify-end gap-4">
+								<button type="button" class="transition-all duration-300 border rounded-md btn text-danger border-danger hover:bg-danger hover:text-white" @click="toggle">Cerrar</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<div style="overflow:auto !important">
 			<RadzenDataGrid @ref="grid" LoadData=@LoadData style="display: flex; align-items: center; gap: 0.5rem; width:100%; min-width:700px !important"
@@ -60,35 +96,37 @@
 			</RadzenDataGrid>
 		</div>
 	</div>
-</div>
 
-<Modal @ref="modal" Title="Crear/Editar" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
+	@* <Modal @ref="modal" Title="Crear/Editar" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
 	<BodyTemplate>
-		<RadzenTemplateForm TItem="TbVehiculoTipoModel" Data="@TipoVehiculoSelecionado" Submit="OnSubmit">
-			<RadzenRow Style="padding: 5px">
-				<RadzenColumn Size="12" SizeMD="3">
-					<RadzenLabel Component="txtNombre" style="width: 100%; padding-left: 5px" Text="Nombre:"></RadzenLabel>
-				</RadzenColumn>
-				<RadzenColumn Size="12" SizeMD="9">
-					<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@TipoVehiculoSelecionado.Nombre"></RadzenTextBox>
-					<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
-				</RadzenColumn>
-			</RadzenRow>
-			<RadzenRow Style="padding: 5px">
-				<RadzenColumn Size="12">
-					<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
-					<RadzenCheckBox @bind-Value="@TipoVehiculoSelecionado.Activo" Name="chkActivo" />
-				</RadzenColumn>
-			</RadzenRow>
+	<RadzenTemplateForm TItem="TbVehiculoTipoModel" Data="@TipoVehiculoSelecionado" Submit="OnSubmit">
+	<RadzenRow Style="padding: 5px">
+	<RadzenColumn Size="12" SizeMD="3">
+	<RadzenLabel Component="txtNombre" style="width: 100%; padding-left: 5px" Text="Nombre:"></RadzenLabel>
+	</RadzenColumn>
+	<RadzenColumn Size="12" SizeMD="9">
+	<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@TipoVehiculoSelecionado.Nombre"></RadzenTextBox>
+	<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
+	</RadzenColumn>
+	</RadzenRow>
+	<RadzenRow Style="padding: 5px">
+	<RadzenColumn Size="12">
+	<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
+	<RadzenCheckBox @bind-Value="@TipoVehiculoSelecionado.Activo" Name="chkActivo" />
+	</RadzenColumn>
+	</RadzenRow>
 
-			<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End">
-				<RadzenButton @ref="btnGuardar" ButtonStyle="Radzen.ButtonStyle.Info" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Guardar" Variant="Radzen.Variant.Flat" Style="margin: 10px" />
-			</RadzenStack>
+	<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End">
+	<RadzenButton @ref="btnGuardar" ButtonStyle="Radzen.ButtonStyle.Info" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Guardar" Variant="Radzen.Variant.Flat" Style="margin: 10px" />
+	</RadzenStack>
 
-		</RadzenTemplateForm>
+	</RadzenTemplateForm>
 
 	</BodyTemplate>
-</Modal>
+	</Modal> *@
+</div>
+
+
 
 @code {
 	private Modal modal = default!;

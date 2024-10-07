@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace GestionFlotas.business
 {
     public class TbVehiculoTipoBL
+
     {
         private readonly FlotasContext _db;
         public TbVehiculoTipoBL(FlotasContext db)
@@ -92,3 +93,6 @@ namespace GestionFlotas.business
         }
     }
 }
+
+ 
+

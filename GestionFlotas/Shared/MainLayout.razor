@@ -1,528 +1,1195 @@
 ﻿@inherits LayoutComponentBase
 <RadzenComponents />
-<PageTitle>GestionFlotas</PageTitle>
+<PageTitle>Gestion Flotas Master 2</PageTitle>
 
-<div class="bg-[#f9fbfd] dark:bg-dark">
 
-    <!-- Start detached bg -->
-    <div class="bg-[url('../images/bg-main.png')] bg-black group-data-[sidebar=dark]/item:bg-darklight group-data-[sidebar=brand]/item:bg-sky-950 min-h-[220px] sm:min-h-[250px] bg-bottom fixed hidden w-full -z-50 detached-img"></div>
-    <!-- End detached bg -->
-    <!-- Start Menu Sidebar Olverlay -->
-    <div x-cloak class="fixed inset-0 bg-black/60 dark:bg-dark/90 z-10 lg:hidden" :class="{'hidden' : !$store.app.sidebar}" @click="$store.app.toggleSidebar()"></div>
-    <!-- End Menu Sidebar Olverlay -->
-    <!-- Start Main Content -->
-    <div class="flex mx-auto main-container">
-        <!-- Start Sidebar -->
-        <nav class="sidebar lg:z-[9] z-[10]">
-            <div class="h-full bg-white dark:bg-darklight group-data-[sidebar=dark]/item:bg-darklight group-data-[sidebar=brand]/item:bg-sky-950 ">
-                <div class="p-4">
-                    <a class='w-full main-logo' href='/html/'>
-                        <img src="./assets/images/logo-dark.svg" class="mx-auto dark-logo h-7 logo dark:hidden group-data-[sidebar=dark]/item:hidden group-data-[sidebar=brand]/item:hidden" alt="logo" />
-                        <img src="./assets/images/logo-light.svg" class="hidden mx-auto light-logo h-7 logo dark:block group-data-[sidebar=dark]/item:block group-data-[sidebar=brand]/item:block" alt="logo" />
-                        <img src="./assets/images/logo-icon.svg" class="hidden mx-auto logo-icon h-7" alt="">
-                    </a>
-                </div>
-                <div class="h-[calc(100vh-60px)]  overflow-y-auto overflow-x-hidden px-5 pb-4 space-y-16 detached-menu">
-                    <ul class="relative flex flex-col gap-1 " x-data="sidebarMenu">
-                        <h2 class="my-2 text-sm text-black/50 dark:text-white/30 group-data-[sidebar=dark]/item:text-white/30 group-data-[sidebar=brand]/item:text-sky-200/50"><span>Menu</span></h2>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group " :class="{'active' : isActive('dashboard')}" @click="toggle('dashboard')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2ZM12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4ZM15.8329 7.33748C16.0697 7.17128 16.3916 7.19926 16.5962 7.40381C16.8002 7.60784 16.8267 7.92955 16.6587 8.16418C14.479 11.2095 13.2796 12.8417 13.0607 13.0607C12.4749 13.6464 11.5251 13.6464 10.9393 13.0607C10.3536 12.4749 10.3536 11.5251 10.9393 10.9393C11.3126 10.5661 12.9438 9.36549 15.8329 7.33748ZM17.5 11C18.0523 11 18.5 11.4477 18.5 12C18.5 12.5523 18.0523 13 17.5 13C16.9477 13 16.5 12.5523 16.5 12C16.5 11.4477 16.9477 11 17.5 11ZM6.5 11C7.05228 11 7.5 11.4477 7.5 12C7.5 12.5523 7.05228 13 6.5 13C5.94772 13 5.5 12.5523 5.5 12C5.5 11.4477 5.94772 11 6.5 11ZM8.81802 7.40381C9.20854 7.79433 9.20854 8.4275 8.81802 8.81802C8.4275 9.20854 7.79433 9.20854 7.40381 8.81802C7.01328 8.4275 7.01328 7.79433 7.40381 7.40381C7.79433 7.01328 8.4275 7.01328 8.81802 7.40381ZM12 5.5C12.5523 5.5 13 5.94772 13 6.5C13 7.05228 12.5523 7.5 12 7.5C11.4477 7.5 11 7.05228 11 6.5C11 5.94772 11.4477 5.5 12 5.5Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Tipos Vehiculo</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('dashboard')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('dashboard')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/'>Default</a></li>
-                                <li><a href='/html/project-dashboard'>Projects</a></li>
-                                <li><a href='/html/ecommerce-dashboard'>eCommerce</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('apps')}" @click="toggle('apps')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M7.5 11.5C5.01472 11.5 3 9.48528 3 7C3 4.51472 5.01472 2.5 7.5 2.5C9.98528 2.5 12 4.51472 12 7C12 9.48528 9.98528 11.5 7.5 11.5ZM7.5 21.5C5.01472 21.5 3 19.4853 3 17C3 14.5147 5.01472 12.5 7.5 12.5C9.98528 12.5 12 14.5147 12 17C12 19.4853 9.98528 21.5 7.5 21.5ZM17.5 11.5C15.0147 11.5 13 9.48528 13 7C13 4.51472 15.0147 2.5 17.5 2.5C19.9853 2.5 22 4.51472 22 7C22 9.48528 19.9853 11.5 17.5 11.5ZM17.5 21.5C15.0147 21.5 13 19.4853 13 17C13 14.5147 15.0147 12.5 17.5 12.5C19.9853 12.5 22 14.5147 22 17C22 19.4853 19.9853 21.5 17.5 21.5ZM7.5 9.5C8.88071 9.5 10 8.38071 10 7C10 5.61929 8.88071 4.5 7.5 4.5C6.11929 4.5 5 5.61929 5 7C5 8.38071 6.11929 9.5 7.5 9.5ZM7.5 19.5C8.88071 19.5 10 18.3807 10 17C10 15.6193 8.88071 14.5 7.5 14.5C6.11929 14.5 5 15.6193 5 17C5 18.3807 6.11929 19.5 7.5 19.5ZM17.5 9.5C18.8807 9.5 20 8.38071 20 7C20 5.61929 18.8807 4.5 17.5 4.5C16.1193 4.5 15 5.61929 15 7C15 8.38071 16.1193 9.5 17.5 9.5ZM17.5 19.5C18.8807 19.5 20 18.3807 20 17C20 15.6193 18.8807 14.5 17.5 14.5C16.1193 14.5 15 15.6193 15 17C15 18.3807 16.1193 19.5 17.5 19.5Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Apps</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('apps')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('apps')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/email'>email</a></li>
-                                <li><a href='/html/chat'>chat</a></li>
-                                <li><a href='/html/contact'>Contact</a></li>
-                                <li><a href='/html/invoice'>invoice</a></li>
-                                <li><a href='/html/calender'>Calendar</a></li>
-                                <li><a href='/html/gallery'>Gallery<span class="inline-block px-2 py-1 text-xs leading-none text-pink-500 rounded bg-pink-500/10 ltr:ml-3 rtl:mr-3">New</span></a></li>
-                                <li><a href='/html/kanban'>Kanban<span class="inline-block px-2 py-1 text-xs leading-none text-pink-500 rounded bg-pink-500/10 ltr:ml-3 rtl:mr-3">New</span></a></li>
-                            </ul>
-                        </li>
-                        <h2 class="my-2 text-sm text-black/50 dark:text-white/30 group-data-[sidebar=dark]/item:text-white/30 group-data-[sidebar=brand]/item:text-sky-200/50"><span>UI Kit</span></h2>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('components')}" @click="toggle('components')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M12 1L21.5 6.5V17.5L12 23L2.5 17.5V6.5L12 1ZM5.49388 7.0777L12.0001 10.8444L18.5062 7.07774L12 3.311L5.49388 7.0777ZM4.5 8.81329V16.3469L11.0001 20.1101V12.5765L4.5 8.81329ZM13.0001 20.11L19.5 16.3469V8.81337L13.0001 12.5765V20.11Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Components</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('components')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('components')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/ui-tabs'>tabs</a></li>
-                                <li><a href='/html/ui-accordions'>accordions</a></li>
-                                <li><a href='/html/ui-modals'>modals</a></li>
-                                <li><a href='/html/ui-clipboard'>clipboard</a></li>
-                                <li><a href='/html/ui-notification'>Notification</a></li>
-                                <li><a href='/html/ui-carousel'>carousel</a></li>
-                                <li><a href='/html/ui-pricing'>pricing</a></li>
-                                <li><a href='/html/ui-lightbox'>lightbox</a></li>
-                                <li><a href='/html/ui-countdown'>Countdown</a></li>
-                                <li><a href='/html/ui-counter'>Counter</a></li>
-                                <li><a href='/html/ui-flatpickr'>Flatpickr <span class="inline-block px-2 py-1 text-xs leading-none text-pink-500 rounded bg-pink-500/10 ltr:ml-3 rtl:mr-3">New</span></a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('elements')}" @click="toggle('elements')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M13 9H21L11 24V15H4L13 0V9ZM11 11V7.22063L7.53238 13H13V17.3944L17.263 11H11Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">UI Elements</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('elements')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('elements')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/ui-alerts'>Alerts</a></li>
-                                <li><a href='/html/ui-buttons'>Buttons</a></li>
-                                <li><a href='/html/ui-buttons-group'>buttons group</a></li>
-                                <li><a href='/html/ui-badge'>badge</a></li>
-                                <li><a href='/html/ui-breadcrumb'>breadcrumb</a></li>
-                                <li><a href='/html/ui-videos'>videos</a></li>
-                                <li><a href='/html/ui-images'>Images</a></li>
-                                <li><a href='/html/ui-dropdowns'>dropdowns</a></li>
-                                <li><a href='/html/ui-typography'>typography</a></li>
-                                <li><a href='/html/ui-avatar'>Avatar</a></li>
-                                <li><a href='/html/ui-tooltips'>tooltips</a></li>
-                                <li><a href='/html/ui-loader'>loader</a></li>
-                                <li><a href='/html/ui-pagination'>pagination</a></li>
-                                <li><a href='/html/ui-progress-bar'>progress bar</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="chart.html" class="nav-link group" @click="toggle('single')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M9 2.4578V4.58152C6.06817 5.76829 4 8.64262 4 12C4 16.4183 7.58172 20 12 20C15.3574 20 18.2317 17.9318 19.4185 15H21.5422C20.2679 19.0571 16.4776 22 12 22C6.47715 22 2 17.5228 2 12C2 7.52236 4.94289 3.73207 9 2.4578ZM12 2C17.5228 2 22 6.47715 22 12C22 12.3375 21.9833 12.6711 21.9506 13H11V2.04938C11.3289 2.01672 11.6625 2 12 2ZM13 4.06189V11H19.9381C19.4869 7.38128 16.6187 4.51314 13 4.06189Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Chart</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="icons.html" class="nav-link group" @click="toggle('single')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C13.4702 20 14.8478 19.6034 16.0316 18.9114L15.0237 17.1835C14.1359 17.7026 13.1027 18 12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12V13C18 13.5523 17.5523 14 17 14C16.4477 14 16 13.5523 16 13V9H14.6458C13.9407 8.37764 13.0144 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16C13.0465 16 13.9991 15.5982 14.7119 14.9404C15.2622 15.5886 16.0831 16 17 16C18.6569 16 20 14.6569 20 13V12ZM12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Font Icons</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="drag-and-drop.html" class="nav-link group" @click="toggle('single')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M12 2L16.2426 6.24264L14.8284 7.65685L12 4.82843L9.17157 7.65685L7.75736 6.24264L12 2ZM2 12L6.24264 7.75736L7.65685 9.17157L4.82843 12L7.65685 14.8284L6.24264 16.2426L2 12ZM22 12L17.7574 16.2426L16.3431 14.8284L19.1716 12L16.3431 9.17157L17.7574 7.75736L22 12ZM12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 13.1046 13.1046 14 12 14ZM12 22L7.75736 17.7574L9.17157 16.3431L12 19.1716L14.8284 16.3431L16.2426 17.7574L12 22Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Drag & Drop</span>
-                                </div>
-                            </a>
-                        </li>
-                        <h2 class="my-2 text-sm text-black/50 dark:text-white/30 group-data-[sidebar=dark]/item:text-white/30 group-data-[sidebar=brand]/item:text-sky-200/50"><span>Table & Forms</span></h2>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('forms')}" @click="toggle('forms')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M21 8V20.9932C21 21.5501 20.5552 22 20.0066 22H3.9934C3.44495 22 3 21.556 3 21.0082V2.9918C3 2.45531 3.4487 2 4.00221 2H14.9968L21 8ZM19 9H14V4H5V20H19V9ZM8 7H11V9H8V7ZM8 11H16V13H8V11ZM8 15H16V17H8V15Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Forms</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('forms')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('forms')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/forms-basic'>Basic</a></li>
-                                <li><a href='/html/forms-input-group'>Input Group</a></li>
-                                <li><a href='/html/forms-editors'>Editors</a></li>
-                                <li><a href='/html/forms-validation'>Validation</a></li>
-                                <li><a href='/html/forms-checkbox'>Checkbox</a></li>
-                                <li><a href='/html/forms-radio'>Radio</a></li>
-                                <li><a href='/html/forms-switches'>Switches</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('table')}" @click="toggle('table')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M4 8H20V5H4V8ZM14 19V10H10V19H14ZM16 19H20V10H16V19ZM8 19V10H4V19H8ZM3 3H21C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Tables</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' :  isActive('table')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('table')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/tables-basic'>Basic</a></li>
-                                <li><a href='/html/tables-datatables'>datatables</a></li>
-                                <li><a href='/html/tables-editable'>editable</a></li>
-                            </ul>
-                        </li>
-                        <h2 class="my-2 text-sm text-black/50 dark:text-white/30 group-data-[sidebar=dark]/item:text-white/30 group-data-[sidebar=brand]/item:text-sky-200/50"><span>Users & Pages</span></h2>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('users')}" @click="toggle('users')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M4 22C4 17.5817 7.58172 14 12 14C16.4183 14 20 17.5817 20 22H18C18 18.6863 15.3137 16 12 16C8.68629 16 6 18.6863 6 22H4ZM12 13C8.685 13 6 10.315 6 7C6 3.685 8.685 1 12 1C15.315 1 18 3.685 18 7C18 10.315 15.315 13 12 13ZM12 11C14.21 11 16 9.21 16 7C16 4.79 14.21 3 12 3C9.79 3 8 4.79 8 7C8 9.21 9.79 11 12 11Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Users</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('users')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('users')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/pages-users-profile'>Profile</a></li>
-                                <li><a href='/html/pages-users-settings'>Settings</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group dark:text-white/80" :class="{'active' : isActive('pages')}" @click="toggle('pages')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M5 8V20H19V8H5ZM5 6H19V4H5V6ZM20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22ZM7 10H11V14H7V10ZM7 16H17V18H7V16ZM13 11H17V13H13V11Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Pages</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' :isActive('pages')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('pages')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/blank'>Starter Page</a></li>
-                                <li><a href='/html/pages-maintenance'>maintenance</a></li>
-                                <li><a href='/html/pages-coming-soon'>coming soon</a></li>
-                                <li><a href='/html/pages-404'>404 Error</a></li>
-                                <li><a href='/html/pages-500'>500 Error</a></li>
-                                <li><a href='/html/pages-503'>503 Error</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('layout')}" @click="toggle('layout')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path fill="currentColor" d="M4 21C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H4ZM8 10H5V19H8V10ZM19 10H10V19H19V10ZM19 5H5V8H19V5Z"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Layout</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('layout')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('layout')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/creative'>Creative Detached</a></li>
-                                <li><a href='/html/detached'>Detached</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="javascript:void(0);" class="items-center justify-between text-black nav-link group" :class="{'active' : isActive('authentication')}" @click="toggle('authentication')">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M6 10V20H19V10H6ZM18 8H20C20.5523 8 21 8.44772 21 9V21C21 21.5523 20.5523 22 20 22H4C3.44772 22 3 21.5523 3 21V9C3 8.44772 3.44772 8 4 8H6V7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7V8ZM16 8V7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7V8H16ZM7 11H9V13H7V11ZM7 14H9V16H7V14ZM7 17H9V19H7V17Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Authentication</span>
-                                </div>
-                                <div class="flex items-center justify-center w-4 h-4 dropdown-icon" :class="{'!rotate-180' : isActive('authentication')}">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                                        <path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" fill="currentColor"></path>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul x-cloak x-show="isActive('authentication')" x-collapse class="flex flex-col gap-1 text-black sub-menu dark:text-white/60 group-data-[sidebar=dark]/item:text-white/60 group-data-[sidebar=brand]/item:text-sky-200/50">
-                                <li><a href='/html/login'>Sign In</a></li>
-                                <li><a href='/html/signup'>Sign Up</a></li>
-                                <li><a href='/html/reset-pw'>Reset Password</a></li>
-                            </ul>
-                        </li>
-                        <h2 class="my-2 text-sm text-black/50 dark:text-white/30 group-data-[sidebar=dark]/item:text-white/30 group-data-[sidebar=brand]/item:text-sky-200/50"><span>Supports</span></h2>
-                        <li class="menu nav-item">
-                            <a href="https://sliced-tailwind.netlify.app/docs/html/#change" target="_blank" class="nav-link group" :class="{'active' : isActive('change')}">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M8 4H21V6H8V4ZM4.5 6.5C3.67157 6.5 3 5.82843 3 5C3 4.17157 3.67157 3.5 4.5 3.5C5.32843 3.5 6 4.17157 6 5C6 5.82843 5.32843 6.5 4.5 6.5ZM4.5 13.5C3.67157 13.5 3 12.8284 3 12C3 11.1716 3.67157 10.5 4.5 10.5C5.32843 10.5 6 11.1716 6 12C6 12.8284 5.32843 13.5 4.5 13.5ZM4.5 20.4C3.67157 20.4 3 19.7284 3 18.9C3 18.0716 3.67157 17.4 4.5 17.4C5.32843 17.4 6 18.0716 6 18.9C6 19.7284 5.32843 20.4 4.5 20.4ZM8 11H21V13H8V11ZM8 18H21V20H8V18Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Changelog</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="menu nav-item">
-                            <a href="https://sliced-tailwind.netlify.app/docs/html/" target="_blank" class="nav-link group" :class="{'active' : isActive('docs')}">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                        <path d="M20 22H4C3.44772 22 3 21.5523 3 21V3C3 2.44772 3.44772 2 4 2H20C20.5523 2 21 2.44772 21 3V21C21 21.5523 20.5523 22 20 22ZM19 20V4H5V20H19ZM8 7H16V9H8V7ZM8 11H16V13H8V11ZM8 15H13V17H8V15Z" fill="currentColor"></path>
-                                    </svg>
-                                    <span class="ltr:pl-1.5 rtl:pr-1.5">Documentation</span>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="relative p-4 pt-0 text-center rounded-md bg-purple help-box group-data-[sidebar=brand]/item:bg-sky-500">
-                        <div class="relative -top-6">
-                            <span class="text-black mx-auto border border-black/10 shadow-[0_0.75rem_1.5rem_rgba(18,38,63,.03)]  bg-white flex items-center justify-center h-12 w-12 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                                    <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22ZM12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM11 15H13V17H11V15ZM13 13.3551V14H11V12.5C11 11.9477 11.4477 11.5 12 11.5C12.8284 11.5 13.5 10.8284 13.5 10C13.5 9.17157 12.8284 8.5 12 8.5C11.2723 8.5 10.6656 9.01823 10.5288 9.70577L8.56731 9.31346C8.88637 7.70919 10.302 6.5 12 6.5C13.933 6.5 15.5 8.067 15.5 10C15.5 11.5855 14.4457 12.9248 13 13.3551Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </div>
-                        <h4 class="text-xl text-white">¿Necesitas ayuda?</h4>
-                        <p class="mt-4 text-white/70">Contactate con soporte</p>
-                        
-                    </div>
-                </div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header border-bottom d-block p-0">
+        <div class="d-flex align-items-center justify-content-between p-3">
+            <h5 class="offcanvas-title text-default" id="offcanvasRightLabel">Switcher</h5> <button type="button"
+                class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <nav class="border-top border-block-start-dashed">
+            <div class="nav nav-tabs nav-justified" id="switcher-main-tab" role="tablist"> <button
+                    class="nav-link active" id="switcher-home-tab" data-bs-toggle="tab" data-bs-target="#switcher-home"
+                    type="button" role="tab" aria-controls="switcher-home" aria-selected="true">Theme Styles</button>
+                <button class="nav-link" id="switcher-profile-tab" data-bs-toggle="tab"
+                    data-bs-target="#switcher-profile" type="button" role="tab" aria-controls="switcher-profile"
+                    aria-selected="false" tabindex="-1">Theme Colors</button>
             </div>
         </nav>
-        <!-- End sidebar -->
-        <!-- Start Content Area -->
-        <div class="flex-1 main-content">
-            <!-- Start Topbar -->
-            <div class="bg-white dark:bg-darklight dark:border-darkborder flex gap-4   items-center justify-between px-4 h-[60px] border-b border-black/10 detached-topbar relative">
-                <div class="flex items-center flex-1 gap-2 sm:gap-4 lg:z-0 z-11">
-                    <button type="button" class="text-black dark:text-white/80" @click="$store.app.toggleSidebar()">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-6 h-6">
-                            <path d="M3 4H21V6H3V4ZM3 11H15V13H3V11ZM3 18H21V20H3V18Z" fill="currentColor"></path>
-                        </svg>
-                    </button>
-                  @*   <form class="flex-1 hidden min-[420px]:block">
-                        <div class="relative max-w-[180px] md:max-w-[350px]">
-                            <input type="text" id="search" class="border-black/10 dark:text-white/80 dark:placeholder:text-white/30 dark:border-darkborder dark:bg-dark dark:focus:border-white/30 focus:border-black/30 placeholder:text-black/50 border text-black text-sm rounded block w-full ltr:pl-3 rtl:pr-3 ltr:pr-7 rtl:pl-7 h-10 bg-[#f9fbfd] focus:ring-0 focus:outline-0" placeholder="Search..." required="">
-                            <button type="button" class="absolute inset-y-0 flex items-center text-black ltr:right-0 rtl:left-0 ltr:pr-2 rtl:pl-2 dark:text-white/80">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                    <path d="M11 2C15.968 2 20 6.032 20 11C20 15.968 15.968 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2ZM11 18C14.8675 18 18 14.8675 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18ZM19.4853 18.0711L22.3137 20.8995L20.8995 22.3137L18.0711 19.4853L19.4853 18.0711Z" fill="currentColor"></path>
-                                </svg>
-                            </button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active border-0" id="switcher-home" role="tabpanel"
+                aria-labelledby="switcher-home-tab" tabindex="0">
+                <div class="">
+                    <p class="switcher-style-head">Theme Color Mode:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-light-theme"> Light </label> <input class="form-check-input"
+                                    type="radio" name="theme-style" id="switcher-light-theme" checked=""> </div>
                         </div>
-                    </form> *@
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-dark-theme"> Dark </label> <input class="form-check-input"
+                                    type="radio" name="theme-style" id="switcher-dark-theme"> </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex items-center gap-4  z-[9] ">
-                    <div class="h-5" x-data="{ fullScreen: false }">
-                        <button class="text-black dark:text-white/80" x-cloak x-bind:class="{ 'hidden': fullScreen, 'block': !fullScreen }" x-on:click="fullScreen = !fullScreen" @click="$store.app.toggleFullScreen()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                <path d="M16 3H22V9H20V5H16V3ZM2 3H8V5H4V9H2V3ZM20 19V15H22V21H16V19H20ZM4 19H8V21H2V15H4V19Z" fill="currentColor"></path>
-                            </svg>
-                        </button>
-                        <button class="text-black dark:text-white/80" x-cloak x-bind:class="{ 'block': fullScreen, 'hidden': !fullScreen }" x-on:click="fullScreen = !fullScreen" @click="$store.app.toggleFullScreen()">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                <path d="M18 7H22V9H16V3H18V7ZM8 9H2V7H6V3H8V9ZM18 17V21H16V15H22V17H18ZM8 15V21H6V17H2V15H8Z" fill="currentColor"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <div>
-                        <a href="javascript:;" class="text-black" x-cloak x-show="$store.app.mode === 'light'" @click="$store.app.toggleMode('dark')">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z" fill="currentColor"></path>
-                            </svg>
-                        </a>
-                        <a href="javascript:;" class="text-black dark:text-white/80" x-cloak x-show="$store.app.mode === 'dark'" @click="$store.app.toggleMode('light')">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5">
-                                <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z" fill="currentColor"></path>
-                            </svg>
-                        </a>
-                    </div>
-                   
-                    <div x-data="{
-                        open: false,
-                        toggle() {
-                            if (this.open) {
-                                return this.close();
-                            }
-
-                            this.$refs.button.focus();
-
-                            this.open = true;
-                            Alpine.store('app').showSettings = true;
-                        },
-                        close(focusAfter) {
-                            if (!this.open) return;
-
-                            this.open = false;
-                            Alpine.store('app').showSettings = false;
-                            focusAfter && focusAfter.focus();
-                        }
-                    }" x-on:keydown.escape.prevent.stop="close($refs.button)" x-on:focusin.window="!$refs.panel.contains($event.target) && close()" x-id="['dropdown-button']" class="relative notification h-[60px] flex items-center justify-center">
-                        <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="relative text-black dark:text-white/80">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5 mx-auto">
-                                <path d="M5 18H19V11.0314C19 7.14806 15.866 4 12 4C8.13401 4 5 7.14806 5 11.0314V18ZM12 2C16.9706 2 21 6.04348 21 11.0314V20H3V11.0314C3 6.04348 7.02944 2 12 2ZM9.5 21H14.5C14.5 22.3807 13.3807 23.5 12 23.5C10.6193 23.5 9.5 22.3807 9.5 21Z" fill="currentColor"></path>
-                            </svg>
-                            <span class="absolute w-2 h-2 border border-white rounded-full -top-px ltr:right-px rtl:left-px bg-purple"></span>
-                        </button>
-
-                        <div x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)" :id="$id('dropdown-button')" style="display: none;" class="absolute z-10 rounded bg-white dark:bg-darklight dark:border-darkborder dark:text-white/80 ltr:right-0 rtl:left-0 text-black/60 border border-black/10 min-w-[253px] top-full noti-area">
-                            <div x-data="{ notifications: [
-                                { id: 1, avatar: 'assets/images/avatar-1.png', message: 'Edited the details of Project', time: '1s ago', show: true },
-                                { id: 2, avatar: 'assets/images/avatar-4.png', message: 'Released a new version', time: '2m ago', show: true },
-                                { id: 3, avatar: 'assets/images/avatar-13.png', message: 'Submitted a bug', time: '10m ago', show: true },
-                                { id: 4, avatar: 'assets/images/avatar-19.png', message: 'Modified A data in Page', time: '15m ago', show: true },
-                                { id: 5, avatar: 'assets/images/avatar-24.png', message: 'Modified A data in Page', time: '30m ago', show: true },
-                                { id: 6, avatar: 'assets/images/avatar-1.png', message: 'Edited the details of Project', time: '45m ago', show: true },
-                                { id: 7, avatar: 'assets/images/avatar-4.png', message: 'Released a new version', time: '1h ago', show: true },
-                                { id: 8, avatar: 'assets/images/avatar-13.png', message: 'Submitted a bug', time: '2h ago', show: true },
-                            ]}">
-                                <h4 class="text-black dark:text-white/80 px-2 py-2.5 border-b border-black/10 flex items-center gap-2">
-                                    Notification
-                                    <span class="inline-block bg-purple/10 text-purple text-[10px] p-1 leading-none rounded" x-text="notifications.filter(notification => notification.show).length"></span>
-                                </h4>
-                                <ul class="overflow-y-auto max-h-56">
-                                    <template x-for="notification in notifications" :key="notification.id">
-                                        <li x-show="notification.show" x-transition.duration.300ms>
-                                            <div class="flex items-center rounded px-2 py-2.5 hover:bg-black/5 hover:text-black gap-2 cursor-pointer group">
-                                                <div class="flex-none overflow-hidden rounded-full h-9 w-9">
-                                                    <img :src="notification.avatar" class="object-cover" alt="avatar" />
-                                                </div>
-                                                <div class="relative flex-1">
-                                                    <p class="whitespace-nowrap overflow-hidden text-ellipsis w-[185px] text-black dark:text-white ltr:pr-4 rtl:pl-4" x-text="notification.message"></p>
-                                                    <p class="text-xs text-black/40 dark:text-darkmuted" x-text="notification.time"></p>
-                                                    <button type="button" @click="notification.show = false" class="absolute hidden transition-all duration-300 rotate-0 ltr:right-0 rtl:left-0 top-1 dark:text-white/80 group-hover:block hover:opacity-80 hover:rotate-180">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5">
-                                                            <path d="M12.0007 10.5865L16.9504 5.63672L18.3646 7.05093L13.4149 12.0007L18.3646 16.9504L16.9504 18.3646L12.0007 13.4149L7.05093 18.3646L5.63672 16.9504L10.5865 12.0007L5.63672 7.05093L7.05093 5.63672L12.0007 10.5865Z" fill="currentColor"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </template>
-                                </ul>
-                            </div>
-
-                            <div class="px-2 py-2.5 border-t border-black/10 dark:border-darkborder">
-                                <a href="javascript:;" class="text-black duration-300 dark:text-white dark:hover:text-purple hover:text-purple">
-                                    Read More
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-3.5 h-3.5 inline-block relative -top-[1px] rtl:rotate-180">
-                                        <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z" fill="currentColor"></path>
-                                    </svg>
-                                </a>
-                            </div>
+                <div class="">
+                    <p class="switcher-style-head">Directions:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label" for="switcher-ltr">
+                                    LTR </label> <input class="form-check-input" type="radio" name="direction"
+                                    id="switcher-ltr" checked=""> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label" for="switcher-rtl">
+                                    RTL </label> <input class="form-check-input" type="radio" name="direction"
+                                    id="switcher-rtl"> </div>
                         </div>
                     </div>
-                    <div x-data="{
-                        open: false,
-                        toggle() {
-                            if (this.open) {
-                                return this.close();
-                            }
-
-                            this.$refs.button.focus();
-
-                            this.open = true;
-                        },
-                        close(focusAfter) {
-                            if (!this.open) return;
-
-                            this.open = false;
-
-                            focusAfter && focusAfter.focus();
-                        }
-                    }" x-on:keydown.escape.prevent.stop="close($refs.button)" x-on:focusin.window="!$refs.panel.contains($event.target) && close()" x-id="['dropdown-button']" class="relative profile h-[60px] flex items-center justify-center">
-                        <button x-ref="button" x-on:click="toggle()" :aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button" class="flex items-center gap-1.5 xl:gap-0 dark:text-white/80">
-                            <img class="rounded-full h-7 w-7 ltr:xl:mr-2 rtl:xl:ml-2" src="./assets/images/user.png" alt="Header Avatar" />
-                            <span class="hidden fw-medium xl:block dark:text-white/80">Stevens L.</span>
-                            <svg :class="{ 'transform rotate-180': open }" class="text-gray-400 transition-transform duration-300 size-5" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-
-                        <ul x-ref="panel" x-show="open" x-transition.origin.top.left x-on:click.outside="close($refs.button)" :id="$id('dropdown-button')" style="display: none;" class="absolute z-10 w-40 overflow-hidden bg-white border rounded top-full dark:text-darkmuted dark:border-darkborder dark:bg-darklight ltr:right-0 rtl:left-0 text-black/60 border-black/10">
-                            <li>
-                                <a href="javaScript:;" class="flex items-center gap-2 px-2 py-2.5 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5 hover:text-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                        <path d="M20 22H18V20C18 18.3431 16.6569 17 15 17H9C7.34315 17 6 18.3431 6 20V22H4V20C4 17.2386 6.23858 15 9 15H15C17.7614 15 20 17.2386 20 20V22ZM12 13C8.68629 13 6 10.3137 6 7C6 3.68629 8.68629 1 12 1C15.3137 1 18 3.68629 18 7C18 10.3137 15.3137 13 12 13ZM12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="currentColor"></path>
-                                    </svg>
-                                    Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javaScript:;" class="flex items-center gap-2 px-2 py-2.5 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5 hover:text-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                        <path d="M6.17071 18C6.58254 16.8348 7.69378 16 9 16C10.3062 16 11.4175 16.8348 11.8293 18H22V20H11.8293C11.4175 21.1652 10.3062 22 9 22C7.69378 22 6.58254 21.1652 6.17071 20H2V18H6.17071ZM12.1707 11C12.5825 9.83481 13.6938 9 15 9C16.3062 9 17.4175 9.83481 17.8293 11H22V13H17.8293C17.4175 14.1652 16.3062 15 15 15C13.6938 15 12.5825 14.1652 12.1707 13H2V11H12.1707ZM6.17071 4C6.58254 2.83481 7.69378 2 9 2C10.3062 2 11.4175 2.83481 11.8293 4H22V6H11.8293C11.4175 7.16519 10.3062 8 9 8C7.69378 8 6.58254 7.16519 6.17071 6H2V4H6.17071ZM9 6C9.55228 6 10 5.55228 10 5C10 4.44772 9.55228 4 9 4C8.44772 4 8 4.44772 8 5C8 5.55228 8.44772 6 9 6ZM15 13C15.5523 13 16 12.5523 16 12C16 11.4477 15.5523 11 15 11C14.4477 11 14 11.4477 14 12C14 12.5523 14.4477 13 15 13ZM9 20C9.55228 20 10 19.5523 10 19C10 18.4477 9.55228 18 9 18C8.44772 18 8 18.4477 8 19C8 19.5523 8.44772 20 9 20Z" fill="currentColor"></path>
-                                    </svg>
-                                    Settings
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javaScript:;" class="flex items-center gap-2 px-2 py-2.5 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5 hover:text-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                        <path d="M5.45455 15L1 18.5V3C1 2.44772 1.44772 2 2 2H17C17.5523 2 18 2.44772 18 3V15H5.45455ZM4.76282 13H16V4H3V14.3851L4.76282 13ZM8 17H18.2372L20 18.3851V8H21C21.5523 8 22 8.44772 22 9V22.5L17.5455 19H9C8.44772 19 8 18.5523 8 18V17Z" fill="currentColor"></path>
-                                    </svg>
-                                    Messages
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javaScript:;" class="flex items-center gap-2 px-2 py-2.5 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5 hover:text-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                        <path d="M19.9381 8H21C22.1046 8 23 8.89543 23 10V14C23 15.1046 22.1046 16 21 16H19.9381C19.446 19.9463 16.0796 23 12 23V21C15.3137 21 18 18.3137 18 15V9C18 5.68629 15.3137 3 12 3C8.68629 3 6 5.68629 6 9V16H3C1.89543 16 1 15.1046 1 14V10C1 8.89543 1.89543 8 3 8H4.06189C4.55399 4.05369 7.92038 1 12 1C16.0796 1 19.446 4.05369 19.9381 8ZM3 10V14H4V10H3ZM20 10V14H21V10H20ZM7.75944 15.7849L8.81958 14.0887C9.74161 14.6662 10.8318 15 12 15C13.1682 15 14.2584 14.6662 15.1804 14.0887L16.2406 15.7849C15.0112 16.5549 13.5576 17 12 17C10.4424 17 8.98882 16.5549 7.75944 15.7849Z" fill="currentColor"></path>
-                                    </svg>
-                                    Support
-                                </a>
-                            </li>
-                            <li class="block h-px my-1 bg-black/5 dark:bg-darkborder"></li>
-                            <li>
-                                <a href="javaScript:;" class="flex items-center gap-2 px-2 py-2.5 dark:hover:bg-white/5 dark:hover:text-white hover:bg-black/5 hover:text-black text-black dark:text-white">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4">
-                                        <path d="M12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C15.2713 2 18.1757 3.57078 20.0002 5.99923L17.2909 5.99931C15.8807 4.75499 14.0285 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20C14.029 20 15.8816 19.2446 17.2919 17.9998L20.0009 17.9998C18.1765 20.4288 15.2717 22 12 22ZM19 16V13H11V11H19V8L24 12L19 16Z" fill="currentColor"></path>
-                                    </svg>
-                                    Sign Out
-                                </a>
-                            </li>
-                        </ul>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Navigation Styles:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-vertical"> Vertical </label> <input class="form-check-input"
+                                    type="radio" name="navigation-style" id="switcher-vertical" checked=""> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-horizontal"> Horizontal </label> <input class="form-check-input"
+                                    type="radio" name="navigation-style" id="switcher-horizontal"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navigation-menu-styles">
+                    <p class="switcher-style-head">Vertical &amp; Horizontal Menu Styles:</p>
+                    <div class="row switcher-style gx-0 pb-2 gy-2">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-menu-click"> Menu Click </label> <input class="form-check-input"
+                                    type="radio" name="navigation-menu-styles" id="switcher-menu-click"> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-menu-hover"> Menu Hover </label> <input class="form-check-input"
+                                    type="radio" name="navigation-menu-styles" id="switcher-menu-hover"> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-icon-click"> Icon Click </label> <input class="form-check-input"
+                                    type="radio" name="navigation-menu-styles" id="switcher-icon-click"> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-icon-hover"> Icon Hover </label> <input class="form-check-input"
+                                    type="radio" name="navigation-menu-styles" id="switcher-icon-hover"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidemenu-layout-styles">
+                    <p class="switcher-style-head">Sidemenu Layout Styles:</p>
+                    <div class="row switcher-style gx-0 pb-2 gy-2">
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-default-menu"> Default Menu </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-default-menu" checked="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-closed-menu"> Closed Menu </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-closed-menu"> </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-icontext-menu"> Icon Text </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-icontext-menu"> </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-icon-overlay"> Icon Overlay </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-icon-overlay"> </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-detached"> Detached </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-detached"> </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-double-menu"> Double Menu </label> <input class="form-check-input"
+                                    type="radio" name="sidemenu-layout-styles" id="switcher-double-menu"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Page Styles:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-regular"> Regular </label> <input class="form-check-input"
+                                    type="radio" name="page-styles" id="switcher-regular" checked=""> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-classic"> Classic </label> <input class="form-check-input"
+                                    type="radio" name="page-styles" id="switcher-classic"> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-modern"> Modern </label> <input class="form-check-input" type="radio"
+                                    name="page-styles" id="switcher-modern"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Layout Width Styles:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-default-width"> Default </label> <input class="form-check-input"
+                                    type="radio" name="layout-width" id="switcher-default-width" checked=""> </div>
+                        </div>
+                        <div class="col-5">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-full-width"> Full Width </label> <input class="form-check-input"
+                                    type="radio" name="layout-width" id="switcher-full-width"> </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-check switch-select"> <label class="form-check-label" for="switcher-boxed">
+                                    Boxed </label> <input class="form-check-input" type="radio" name="layout-width"
+                                    id="switcher-boxed"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Menu Positions:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-menu-fixed"> Fixed </label> <input class="form-check-input"
+                                    type="radio" name="menu-positions" id="switcher-menu-fixed" checked=""> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-menu-scroll"> Scrollable </label> <input class="form-check-input"
+                                    type="radio" name="menu-positions" id="switcher-menu-scroll"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Header Positions:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-header-fixed"> Fixed </label> <input class="form-check-input"
+                                    type="radio" name="header-positions" id="switcher-header-fixed" checked="">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-header-scroll"> Scrollable </label> <input class="form-check-input"
+                                    type="radio" name="header-positions" id="switcher-header-scroll"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="switcher-style-head">Loader:</p>
+                    <div class="row switcher-style gx-0">
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-loader-enable"> Enable </label> <input class="form-check-input"
+                                    type="radio" name="page-loader" id="switcher-loader-enable"> </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-check switch-select"> <label class="form-check-label"
+                                    for="switcher-loader-disable"> Disable </label> <input class="form-check-input"
+                                    type="radio" name="page-loader" id="switcher-loader-disable" checked=""> </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            @Body
-         
+            <div class="tab-pane fade border-0" id="switcher-profile" role="tabpanel"
+                aria-labelledby="switcher-profile-tab" tabindex="0">
+                <div>
+                    <div class="theme-colors">
+                        <p class="switcher-style-head">Menu Colors:</p>
+                        <div class="d-flex switcher-style pb-2">
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-white" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="menu-colors" id="switcher-menu-light"
+                                    checked="" aria-label="Light Menu" data-bs-original-title="Light Menu"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-dark" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="menu-colors" id="switcher-menu-dark"
+                                    aria-label="Dark Menu" data-bs-original-title="Dark Menu"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="menu-colors" id="switcher-menu-primary"
+                                    aria-label="Color Menu" data-bs-original-title="Color Menu"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-gradient" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="menu-colors" id="switcher-menu-gradient"
+                                    aria-label="Gradient Menu" data-bs-original-title="Gradient Menu"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-transparent" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="menu-colors"
+                                    id="switcher-menu-transparent" aria-label="Transparent Menu"
+                                    data-bs-original-title="Transparent Menu"> </div>
+                        </div>
+                        <div class="px-4 pb-3 text-muted fs-11">Note:If you want to change color Menu dynamically
+                            change from below Theme Primary color picker</div>
+                    </div>
+                    <div class="theme-colors">
+                        <p class="switcher-style-head">Header Colors:</p>
+                        <div class="d-flex switcher-style pb-2">
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-white" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="header-colors" id="switcher-header-light"
+                                    aria-label="Light Header" data-bs-original-title="Light Header"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-dark" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="header-colors" id="switcher-header-dark"
+                                    aria-label="Dark Header" data-bs-original-title="Dark Header"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="header-colors"
+                                    id="switcher-header-primary" aria-label="Color Header"
+                                    data-bs-original-title="Color Header"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-gradient" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="header-colors"
+                                    id="switcher-header-gradient" aria-label="Gradient Header"
+                                    data-bs-original-title="Gradient Header"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-transparent" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" type="radio" name="header-colors"
+                                    id="switcher-header-transparent" checked="" aria-label="Transparent Header"
+                                    data-bs-original-title="Transparent Header"> </div>
+                        </div>
+                        <div class="px-4 pb-3 text-muted fs-11">Note:If you want to change color Header dynamically
+                            change from below Theme Primary color picker</div>
+                    </div>
+                    <div class="theme-colors">
+                        <p class="switcher-style-head">Theme Primary:</p>
+                        <div class="d-flex flex-wrap align-items-center switcher-style">
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary-1" type="radio"
+                                    name="theme-primary" id="switcher-primary"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary-2" type="radio"
+                                    name="theme-primary" id="switcher-primary1"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary-3" type="radio"
+                                    name="theme-primary" id="switcher-primary2"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary-4" type="radio"
+                                    name="theme-primary" id="switcher-primary3"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-primary-5" type="radio"
+                                    name="theme-primary" id="switcher-primary4"> </div>
+                            <div class="form-check switch-select ps-0 mt-1 color-primary-light">
+                                <div class="theme-container-primary"><button class="">nano</button></div>
+                                <div class="pickr-container-primary" onchange="updateChartColor(this.value)">
+                                    <div class="pickr">
+
+                                        <button type="button" class="pcr-button" role="button"
+                                            aria-label="toggle color picker dialog"
+                                            style="--pcr-color: rgba(84, 109, 254, 1);"></button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="theme-colors">
+                        <p class="switcher-style-head">Theme Background:</p>
+                        <div class="d-flex flex-wrap align-items-center switcher-style">
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-bg-1" type="radio" name="theme-background"
+                                    id="switcher-background"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-bg-2" type="radio" name="theme-background"
+                                    id="switcher-background1"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-bg-3" type="radio" name="theme-background"
+                                    id="switcher-background2"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-bg-4" type="radio" name="theme-background"
+                                    id="switcher-background3"> </div>
+                            <div class="form-check switch-select me-3"> <input
+                                    class="form-check-input color-input color-bg-5" type="radio" name="theme-background"
+                                    id="switcher-background4"> </div>
+                            <div class="form-check switch-select ps-0 mt-1 tooltip-static-demo color-bg-transparent">
+                                <div class="theme-container-background"><button>nano</button></div>
+                                <div class="pickr-container-background">
+                                    <div class="pickr">
+
+                                        <button type="button" class="pcr-button" role="button"
+                                            aria-label="toggle color picker dialog"
+                                            style="--pcr-color: rgba(84, 109, 254, 1);"></button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-image mb-3">
+                        <p class="switcher-style-head">Menu With Background Image:</p>
+                        <div class="d-flex flex-wrap align-items-center switcher-style">
+                            <div class="form-check switch-select m-2"> <input
+                                    class="form-check-input bgimage-input bg-img1" type="radio" name="menu-background"
+                                    id="switcher-bg-img"> </div>
+                            <div class="form-check switch-select m-2"> <input
+                                    class="form-check-input bgimage-input bg-img2" type="radio" name="menu-background"
+                                    id="switcher-bg-img1"> </div>
+                            <div class="form-check switch-select m-2"> <input
+                                    class="form-check-input bgimage-input bg-img3" type="radio" name="menu-background"
+                                    id="switcher-bg-img2"> </div>
+                            <div class="form-check switch-select m-2"> <input
+                                    class="form-check-input bgimage-input bg-img4" type="radio" name="menu-background"
+                                    id="switcher-bg-img3"> </div>
+                            <div class="form-check switch-select m-2"> <input
+                                    class="form-check-input bgimage-input bg-img5" type="radio" name="menu-background"
+                                    id="switcher-bg-img4"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between canvas-footer flex-wrap"> <a
+                    href="https://themeforest.net/item/mamix-bootstrap-html-admin-dashboard-template/52341812"
+                    target="_blank" class="btn btn-primary m-1">Buy Now</a> <a
+                    href="https://themeforest.net/user/spruko/portfolio" target="_blank"
+                    class="btn btn-secondary m-1">Our Portfolio</a> <a href="javascript:void(0);" id="reset-all"
+                    class="btn btn-danger m-1">Reset</a> </div>
         </div>
     </div>
+</div> <!-- End Switcher --> <!-- Loader -->
+<div id="loader" class="d-none"> <img src="assets2/images/media/loader.svg" alt=""> </div> <!-- Loader -->
+<div class="page"> <!-- app-header -->
+    <header class="app-header sticky sticky-pin" id="header"> <!-- Start::main-header-container -->
+        <div class="main-header-container container-fluid"> <!-- Start::header-content-left -->
+            <div class="header-content-left"> <!-- Start::header-element -->
+                <div class="header-element">
+                    <div class="horizontal-logo"> <a href="index.html" class="header-logo"> <img
+                                src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
+                            <img src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
+                            <img src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img
+                                src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark"> </a>
+                    </div>
+                </div> <!-- End::header-element --> <!-- Start::header-element -->
+                <div class="header-element mx-lg-0 mx-2"> <a aria-label="Hide Sidebar"
+                        class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
+                        data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a> </div>
+                <!-- End::header-element --> <!-- Start::header-element -->
+                <div class="header-element header-search d-md-block d-none my-auto"> <!-- Start::header-link -->
+                    <div class="autoComplete_wrapper" role="combobox" aria-owns="autoComplete_list_1"
+                        aria-haspopup="true" aria-expanded="false"><input type="text"
+                            class="header-search-bar form-control" id="header-search"
+                            placeholder="Search for Results..." spellcheck="false" autocomplete="off"
+                            autocapitalize="off" aria-controls="autoComplete_list_1" aria-autocomplete="both">
+                        <ul id="autoComplete_list_1" role="listbox" hidden=""></ul>
+                    </div> <a href="javascript:void(0);" class="header-search-icon border-0"> <i
+                            class="bi bi-search"></i> </a> <!-- End::header-link -->
+                </div> <!-- End::header-element -->
+            </div> <!-- End::header-content-left -->
+
+            <!-- Start::header-content-right -->
+            <ul class="header-content-right"> <!-- Start::header-element -->
+                <li class="header-element d-md-none d-block"> <a href="javascript:void(0);" class="header-link"
+                        data-bs-toggle="modal" data-bs-target="#header-responsive-search">
+                        <!-- Start::header-link-icon --> <i class="bi bi-search header-link-icon"></i>
+                        <!-- End::header-link-icon --> </a> </li> <!-- End::header-element -->
+                <!-- Start::header-element -->
+                <li class="header-element country-selector dropdown"> <!-- Start::header-link|dropdown-toggle --> <a
+                        href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
+                        data-bs-toggle="dropdown"> <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon"
+                            width="32" height="32" viewBox="0 0 256 256">
+                            <rect width="256" height="256" fill="none"></rect>
+                            <polygon points="136 184 216 184 176 104 136 184" opacity="0.2"></polygon>
+                            <path d="M88,127.56A95.78,95.78,0,0,1,56,56h64a95.78,95.78,0,0,1-32,71.56Z" opacity="0.2">
+                            </path>
+                            <polyline points="231.97 216 175.97 104 119.97 216" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></polyline>
+                            <line x1="135.97" y1="184" x2="215.97" y2="184" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <line x1="87.97" y1="32" x2="87.97" y2="56" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <line x1="23.97" y1="56" x2="151.97" y2="56" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></line>
+                            <path d="M120,56a96,96,0,0,1-96,96" fill="none" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="16"></path>
+                            <path d="M61.44,88A96,96,0,0,0,152,152" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16"></path>
+                        </svg> </a> <!-- End::header-link|dropdown-toggle -->
+                    <ul class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> English </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> español </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> français </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> عربي </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> Deutsch </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> 中国人 </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> Italiano </a> </li>
+                        <li> <a class="dropdown-item d-flex align-items-center" href="javascript:void(0);"> <span
+                                    class="avatar avatar-rounded avatar-xs lh-1 me-2"> <img
+                                        src="assets2/images/flags/14.jpg" alt="img"> </span> Русский </a> </li>
+                    </ul>
+                </li> <!-- End::header-element --> <!-- Start::header-element -->
+                <li class="header-element header-theme-mode"> <!-- Start::header-link|layout-setting --> <a
+                        href="javascript:void(0);" class="header-link layout-setting"> <span class="light-layout">
+                            <!-- Start::header-link-icon --> <svg xmlns="http://www.w3.org/2000/svg"
+                                class="header-link-icon" width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+                                <path
+                                    d="M98.31,130.38ZM94.38,17.62h0A64.06,64.06,0,0,1,17.62,94.38h0A64.12,64.12,0,0,0,55,138.93h0a44.08,44.08,0,0,1,43.33-8.54,68.13,68.13,0,0,1,45.47-47.32l.15,0c0-1,.07-2,.07-3A64,64,0,0,0,94.38,17.62Z"
+                                    opacity="0.1"></path>
+                                <path
+                                    d="M164,72a76.45,76.45,0,0,0-12.36,1A71.93,71.93,0,0,0,96.17,9.83a8,8,0,0,0-9.59,9.58A56.45,56.45,0,0,1,88,32,56.06,56.06,0,0,1,32,88a56.45,56.45,0,0,1-12.59-1.42,8,8,0,0,0-9.59,9.59,72.22,72.22,0,0,0,32.29,45.06A52,52,0,0,0,84,224h80a76,76,0,0,0,0-152ZM29.37,104c.87,0,1.75,0,2.63,0a72.08,72.08,0,0,0,72-72c0-.89,0-1.78,0-2.67a55.63,55.63,0,0,1,32,48,76.28,76.28,0,0,0-43,43.4A52,52,0,0,0,54,129.59,56.22,56.22,0,0,1,29.37,104ZM164,208H84a36,36,0,1,1,4.78-71.69c-.37,2.37-.63,4.79-.77,7.23a8,8,0,0,0,16,.92,58.91,58.91,0,0,1,1.88-11.81c0-.16.09-.32.12-.48A60.06,60.06,0,1,1,164,208Z">
+                                </path>
+                            </svg> <!-- End::header-link-icon --> </span> <span class="dark-layout">
+                            <!-- Start::header-link-icon --> <svg xmlns="http://www.w3.org/2000/svg"
+                                class="header-link-icon" width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+                                <path
+                                    d="M131.84,84.41v0a68.22,68.22,0,0,0-41.65,46v-.11a44.08,44.08,0,0,0-38.54,5h0a48,48,0,1,1,80.19-50.94Z"
+                                    opacity="0.1"></path>
+                                <path
+                                    d="M156,72a76.2,76.2,0,0,0-20.26,2.73,55.63,55.63,0,0,0-9.41-11.54l9.51-13.57a8,8,0,1,0-13.11-9.18L113.22,54A55.9,55.9,0,0,0,88,48c-.58,0-1.16,0-1.74,0L83.37,31.71a8,8,0,1,0-15.75,2.77L70.5,50.82A56.1,56.1,0,0,0,47.23,65.67L33.61,56.14a8,8,0,1,0-9.17,13.11L38,78.77A55.55,55.55,0,0,0,32,104c0,.57,0,1.15,0,1.72L15.71,108.6a8,8,0,0,0,1.38,15.88,8.24,8.24,0,0,0,1.39-.12l16.32-2.88a55.74,55.74,0,0,0,5.86,12.42A52,52,0,0,0,76,224h80a76,76,0,0,0,0-152ZM48,104a40,40,0,0,1,72.54-23.24,76.26,76.26,0,0,0-35.62,40,52.14,52.14,0,0,0-31,4.17A40,40,0,0,1,48,104ZM156,208H76a36,36,0,1,1,4.78-71.69c-.37,2.37-.63,4.79-.77,7.23a8,8,0,0,0,16,.92,58.91,58.91,0,0,1,1.88-11.81c0-.16.09-.32.12-.48A60.06,60.06,0,1,1,156,208Z">
+                                </path>
+                            </svg> <!-- End::header-link-icon --> </span> </a> <!-- End::header-link|layout-setting -->
+                </li> <!-- End::header-element --> <!-- Start::header-element -->
+                <li class="header-element cart-dropdown dropdown"> <!-- Start::header-link|dropdown-toggle --> <a
+                        href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside"
+                        data-bs-toggle="dropdown"> <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon"
+                            width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+                            <path d="M224,72l-28.52,92.71A16,16,0,0,1,180.18,176H84.07a16,16,0,0,1-15.39-11.6L42.29,72Z"
+                                opacity="0.1"></path>
+                            <path
+                                d="M96,216a16,16,0,1,1-16-16A16,16,0,0,1,96,216Zm88-16a16,16,0,1,0,16,16A16,16,0,0,0,184,200ZM231.65,74.35l-28.53,92.71A23.89,23.89,0,0,1,180.18,184H84.07A24.11,24.11,0,0,1,61,166.59L24.82,40H8A8,8,0,0,1,8,24H24.82A16.08,16.08,0,0,1,40.21,35.6L48.32,64H224a8,8,0,0,1,7.65,10.35ZM213.17,80H52.89l23.49,82.2a8,8,0,0,0,7.69,5.8h96.11a8,8,0,0,0,7.65-5.65Z">
+                            </path>
+                        </svg> <span class="badge bg-primary rounded-pill header-icon-badge"
+                            id="cart-icon-badge">5</span> </a> <!-- End::header-link|dropdown-toggle -->
+                    <!-- Start::main-header-dropdown -->
+                    <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="mb-0 fs-16">Cart Items<span
+                                        class="badge bg-success-transparent ms-1 fs-12 rounded-circle"
+                                        id="cart-data">5</span></p><a href="ecommerce-search.html"
+                                    class="btn btn-secondary-light btn-sm btn-wave waves-effect waves-light">Continue
+                                    Shopping <i class="ti ti-arrow-narrow-right ms-1"></i></a>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <ul class="list-unstyled mb-0" id="header-cart-items-scroll" data-simplebar="init">
+                            <div class="simplebar-wrapper" style="margin: 0px;">
+                                <div class="simplebar-height-auto-observer-wrapper">
+                                    <div class="simplebar-height-auto-observer"></div>
+                                </div>
+                                <div class="simplebar-mask">
+                                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                        <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                            aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                            <div class="simplebar-content" style="padding: 0px;">
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center cart-dropdown-item gap-3">
+                                                        <div class="lh-1"> <span class="avatar avatar-md bg-gray-300">
+                                                                <img src="assets2/images/ecommerce/png/30.png"
+                                                                    alt="img"> </span> </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-0">
+                                                                <div class="mb-0 fs-14 fw-medium"> <a
+                                                                        href="ecommerce_customer_cart.html">SoundSync
+                                                                        Headphones</a>
+                                                                    <div class="fs-11 text-muted"> <span>Qty : 2,</span>
+                                                                        <span>Color : <span
+                                                                                class="text-cart-headset fw-semibold">Ocean
+                                                                                Blue</span></span> </div>
+                                                                </div>
+                                                                <div class="text-end"> <a href="javascript:void(0);"
+                                                                        class="header-cart-remove dropdown-item-close"><i
+                                                                            class="ri-delete-bin-line"></i></a>
+                                                                    <h6 class="fw-medium mb-0 mt-1">$75<span
+                                                                            class="text-decoration-line-through text-muted fw-normal ms-1 fs-13 d-inline-block">$99</span>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center cart-dropdown-item gap-3">
+                                                        <div class="lh-1"> <span class="avatar avatar-md bg-gray-300">
+                                                                <img src="assets2/images/ecommerce/png/31.png"
+                                                                    alt="img"> </span> </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-0">
+                                                                <div class="mb-0 fs-14 fw-medium"> <a
+                                                                        href="ecommerce_customer_cart.html">Western
+                                                                        Ladies Bag</a>
+                                                                    <div class="fs-11 text-muted"> <span>Qty : 1,</span>
+                                                                        <span>Color : <span
+                                                                                class="text-cart-handbag fw-semibold">Blush
+                                                                                Pink</span></span> </div>
+                                                                </div>
+                                                                <div class="text-end"> <a href="javascript:void(0);"
+                                                                        class="header-cart-remove dropdown-item-close"><i
+                                                                            class="ri-delete-bin-line"></i></a>
+                                                                    <h6 class="fw-medium mb-0 mt-1">$120<span
+                                                                            class="text-decoration-line-through text-muted fw-normal ms-1 fs-13 d-inline-block">$149</span>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center cart-dropdown-item gap-3">
+                                                        <div class="lh-1"> <span class="avatar avatar-md bg-gray-300">
+                                                                <img src="assets2/images/ecommerce/png/32.png"
+                                                                    alt="img"> </span> </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-0">
+                                                                <div class="mb-0 fs-14 fw-medium"> <a
+                                                                        href="ecommerce_customer_cart.html">Elitr Alarm
+                                                                        Clock</a>
+                                                                    <div class="fs-11 text-muted"> <span>Qty : 2,</span>
+                                                                        <span>Color : <span
+                                                                                class="text-cart-alaramclock fw-semibold">Sky
+                                                                                Blue</span></span> </div>
+                                                                </div>
+                                                                <div class="text-end"> <a href="javascript:void(0);"
+                                                                        class="header-cart-remove dropdown-item-close"><i
+                                                                            class="ri-delete-bin-line"></i></a>
+                                                                    <h6 class="fw-medium mb-0 mt-1">$30<span
+                                                                            class="text-decoration-line-through text-muted fw-normal ms-1 fs-13 d-inline-block">$49</span>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center cart-dropdown-item gap-3">
+                                                        <div class="lh-1"> <span class="avatar avatar-md bg-gray-300">
+                                                                <img src="assets2/images/ecommerce/png/12.png"
+                                                                    alt="img"> </span> </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-0">
+                                                                <div class="mb-0 fs-14 fw-medium"> <a
+                                                                        href="ecommerce_customer_cart.html">Aus Polo
+                                                                        Assn</a>
+                                                                    <div class="fs-11 text-muted"> <span>Qty : 3,</span>
+                                                                        <span>Color : <span
+                                                                                class="text-cart-sweatshirt fw-semibold">Soft
+                                                                                Peach</span></span> </div>
+                                                                </div>
+                                                                <div class="text-end"> <a href="javascript:void(0);"
+                                                                        class="header-cart-remove dropdown-item-close"><i
+                                                                            class="ri-delete-bin-line"></i></a>
+                                                                    <h6 class="fw-medium mb-0 mt-1">$70<span
+                                                                            class="text-decoration-line-through text-muted fw-normal ms-1 fs-13 d-inline-block">$129</span>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center cart-dropdown-item gap-3">
+                                                        <div class="lh-1"> <span class="avatar avatar-md bg-gray-300">
+                                                                <img src="assets2/images/ecommerce/png/16.png"
+                                                                    alt="img"> </span> </div>
+                                                        <div class="flex-fill">
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between mb-0">
+                                                                <div class="mb-0 fs-14 fw-medium"> <a
+                                                                        href="ecommerce_customer_cart.html">Smart
+                                                                        Watch</a>
+                                                                    <div class="fs-11 text-muted"> <span>Qty : 1,</span>
+                                                                        <span>Color : <span
+                                                                                class="text-cart-smartwatch fw-semibold">Crimson
+                                                                                Red</span></span> </div>
+                                                                </div>
+                                                                <div class="text-end"> <a href="javascript:void(0);"
+                                                                        class="header-cart-remove dropdown-item-close"><i
+                                                                            class="ri-delete-bin-line"></i></a>
+                                                                    <h6 class="fw-medium mb-0 mt-1">$200<span
+                                                                            class="text-decoration-line-through text-muted fw-normal ms-1 fs-13 d-inline-block">$249</span>
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                            </div>
+                            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="width: 0px; display: none;">
+
+                                </div>
+                            </div>
+                            <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="height: 0px; display: none;">
+
+                                </div>
+                            </div>
+                        </ul>
+                        <div class="p-3 empty-header-item border-top">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="fw-medium fs-14">Total :</div>
+                                <h5 class="mb-0">$740</h5>
+                            </div>
+                            <div class="text-center d-grid"> <a href="ecommerce_customer_checkout.html"
+                                    class="btn btn-primary btn-wave waves-effect waves-light">Proceed to checkout</a>
+                            </div>
+                        </div>
+                        <div class="p-5 empty-item d-none">
+                            <div class="text-center"> <span
+                                    class="avatar avatar-xl avatar-rounded bg-primary-transparent"> <i
+                                        class="ri-shopping-cart-2-line fs-2"></i> </span>
+                                <h6 class="fw-medium mb-1 mt-3">Your Cart is Empty</h6> <span
+                                    class="mb-3 fw-normal fs-13 d-block">Add some items to make it happy :)</span>
+                            </div>
+                        </div>
+                    </div> <!-- End::main-header-dropdown -->
+                </li> <!-- End::header-element --> <!-- Start::header-element -->
+                <li class="header-element notifications-dropdown d-xl-block d-none dropdown">
+                    <!-- Start::header-link|dropdown-toggle --> <a href="javascript:void(0);"
+                        class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                        id="messageDropdown" aria-expanded="false"> <svg xmlns="http://www.w3.org/2000/svg"
+                            class="header-link-icon animate-bell" width="32" height="32" fill="#000000"
+                            viewBox="0 0 256 256">
+                            <path
+                                d="M208,192H48a8,8,0,0,1-6.88-12C47.71,168.6,56,139.81,56,104a72,72,0,0,1,144,0c0,35.82,8.3,64.6,14.9,76A8,8,0,0,1,208,192Z"
+                                opacity="0.1"></path>
+                            <path
+                                d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z">
+                            </path>
+                        </svg> <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span> </a>
+                    <!-- End::header-link|dropdown-toggle --> <!-- Start::main-header-dropdown -->
+                    <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
+                        <div class="p-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p class="mb-0 fs-16">Notifications</p><span class="badge bg-secondary-transparent"
+                                    id="notifiation-data">5 Unread</span>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <ul class="list-unstyled mb-0" id="header-notification-scroll" data-simplebar="init">
+                            <div class="simplebar-wrapper" style="margin: 0px;">
+                                <div class="simplebar-height-auto-observer-wrapper">
+                                    <div class="simplebar-height-auto-observer"></div>
+                                </div>
+                                <div class="simplebar-mask">
+                                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                        <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                            aria-label="scrollable content" style="height: auto; overflow: hidden;">
+                                            <div class="simplebar-content" style="padding: 0px;">
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="pe-2 lh-1"> <span
+                                                                class="avatar avatar-md avatar-rounded bg-primary"> <i
+                                                                    class="ti ti-message-dots fs-5"></i> </span> </div>
+                                                        <div
+                                                            class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <p class="mb-0 fw-medium"><a
+                                                                        href="javascript:void(0);">Messages</a></p>
+                                                                <div
+                                                                    class="text-muted fw-normal fs-12 header-notification-text text-truncate">
+                                                                    John Doe messaged you.</div>
+                                                            </div>
+                                                            <div> <a href="javascript:void(0);"
+                                                                    class="min-w-fit-content text-muted dropdown-item-close1"><i
+                                                                        class="ri-close-circle-line fs-5"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="pe-2 lh-1"> <span
+                                                                class="avatar avatar-md bg-secondary avatar-rounded"> <i
+                                                                    class="ti ti-shopping-cart fs-5"></i> </span> </div>
+                                                        <div
+                                                            class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <p class="mb-0 fw-medium"><a
+                                                                        href="javascript:void(0);">Orders</a></p>
+                                                                <div
+                                                                    class="text-muted fw-normal fs-12 header-notification-text text-truncate">
+                                                                    Order <span class="text-warning">#12345</span>
+                                                                    confirmed.</div>
+                                                            </div>
+                                                            <div> <a href="javascript:void(0);"
+                                                                    class="min-w-fit-content text-muted dropdown-item-close1"><i
+                                                                        class="ri-close-circle-line fs-5"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="pe-2 lh-1"> <span
+                                                                class="avatar avatar-md bg-success avatar-rounded"> <i
+                                                                    class="ti ti-user-circle fs-5"></i> </span> </div>
+                                                        <div
+                                                            class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <p class="mb-0 fw-medium"><a
+                                                                        href="javascript:void(0);">Profile</a></p>
+                                                                <div
+                                                                    class="text-muted fw-normal fs-12 header-notification-text text-truncate">
+                                                                    Complete your profile for offers!</div>
+                                                            </div>
+                                                            <div> <a href="javascript:void(0);"
+                                                                    class="min-w-fit-content text-muted dropdown-item-close1"><i
+                                                                        class="ri-close-circle-line fs-5"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="pe-2 lh-1"> <span
+                                                                class="avatar avatar-md bg-orange avatar-rounded"> <i
+                                                                    class="ti ti-gift fs-5"></i> </span> </div>
+                                                        <div
+                                                            class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <p class="mb-0 fw-medium"><a
+                                                                        href="javascript:void(0);">Offers</a></p>
+                                                                <div
+                                                                    class="text-muted fw-normal fs-12 header-notification-text text-truncate">
+                                                                    20% off electronics!</div>
+                                                            </div>
+                                                            <div> <a href="javascript:void(0);"
+                                                                    class="min-w-fit-content text-muted dropdown-item-close1"><i
+                                                                        class="ri-close-circle-line fs-5"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="dropdown-item">
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="pe-2 lh-1"> <span
+                                                                class="avatar avatar-md bg-info avatar-rounded"> <i
+                                                                    class="ti ti-calendar fs-5"></i> </span> </div>
+                                                        <div
+                                                            class="flex-grow-1 d-flex align-items-center justify-content-between">
+                                                            <div>
+                                                                <p class="mb-0 fw-medium"><a
+                                                                        href="javascript:void(0);">Events</a></p>
+                                                                <div
+                                                                    class="text-muted fw-normal fs-12 header-notification-text text-truncate">
+                                                                    Webinar in 1 hour!</div>
+                                                            </div>
+                                                            <div> <a href="javascript:void(0);"
+                                                                    class="min-w-fit-content text-muted dropdown-item-close1"><i
+                                                                        class="ri-close-circle-line fs-5"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
+                            </div>
+                            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+                            </div>
+                            <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+                            </div>
+                        </ul>
+                        <div class="p-3 empty-header-item1 border-top">
+                            <div class="d-grid"> <a href="javascript:void(0);"
+                                    class="btn btn-primary btn-wave waves-effect waves-light">View All</a> </div>
+                        </div>
+                        <div class="p-5 empty-item1 d-none">
+                            <div class="text-center"> <span
+                                    class="avatar avatar-xl avatar-rounded bg-secondary-transparent"> <i
+                                        class="ri-notification-off-line fs-2"></i> </span>
+                                <h6 class="fw-medium mt-3">No New Notifications</h6>
+                            </div>
+                        </div>
+                    </div> <!-- End::main-header-dropdown -->
+                </li> <!-- End::header-element --> <!-- Start::header-element -->
+                <li class="header-element header-fullscreen"> <!-- Start::header-link --> <a onclick="openFullscreen();"
+                        href="javascript:void(0);" class="header-link"> <svg xmlns="http://www.w3.org/2000/svg"
+                            class=" full-screen-open header-link-icon" width="32" height="32" fill="#000000"
+                            viewBox="0 0 256 256">
+                            <path d="M208,48V88L168,48ZM48,208H88L48,168Zm160,0V168l-40,40ZM48,88,88,48H48Z"
+                                opacity="0.1"></path>
+                            <path
+                                d="M208,40H168a8,8,0,0,0-5.66,13.66l40,40A8,8,0,0,0,216,88V48A8,8,0,0,0,208,40Zm-8,28.69L187.31,56H200ZM53.66,162.34A8,8,0,0,0,40,168v40a8,8,0,0,0,8,8H88a8,8,0,0,0,5.66-13.66ZM56,200V187.31L68.69,200Zm155.06-39.39a8,8,0,0,0-8.72,1.73l-40,40A8,8,0,0,0,168,216h40a8,8,0,0,0,8-8V168A8,8,0,0,0,211.06,160.61ZM200,200H187.31L200,187.31ZM88,40H48a8,8,0,0,0-8,8V88a8,8,0,0,0,13.66,5.66l40-40A8,8,0,0,0,88,40ZM56,68.69V56H68.69Z">
+                            </path>
+                        </svg> <svg xmlns="http://www.w3.org/2000/svg" class="full-screen-close header-link-icon d-none"
+                            width="32" height="32" fill="#000000" viewBox="0 0 256 256">
+                            <path d="M208,48V96L160,48ZM48,208H96L48,160Z" opacity="0.1"></path>
+                            <path
+                                d="M208,40H160a8,8,0,0,0-5.66,13.66L172.69,72l-34.35,34.34a8,8,0,0,0,11.32,11.32L184,83.31l18.34,18.35A8,8,0,0,0,216,96V48A8,8,0,0,0,208,40Zm-8,36.69L179.31,56H200Zm-93.66,61.65L72,172.69,53.66,154.34A8,8,0,0,0,40,160v48a8,8,0,0,0,8,8H96a8,8,0,0,0,5.66-13.66L83.31,184l34.35-34.34a8,8,0,0,0-11.32-11.32ZM56,200V179.31L76.69,200Z">
+                            </path>
+                        </svg> </a> <!-- End::header-link --> </li> <!-- End::header-element -->
+                <!-- Start::header-element -->
+                <li class="header-element dropdown"> <!-- Start::header-link|dropdown-toggle --> <a
+                        href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile"
+                        data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <div class="me-xl-2 me-0"> <img src="assets2/images/faces/14.jpg" alt="img"
+                                    class="avatar avatar-sm avatar-rounded"> </div>
+                            <div class="d-xl-block d-none lh-1"> <span class="fw-medium lh-1">Mr. Jack</span> </div>
+                        </div>
+                    </a> <!-- End::header-link|dropdown-toggle -->
+                    <ul class="main-header-dropdown dropdown-menu pt-0 overflow-hidden header-profile-dropdown dropdown-menu-end"
+                        aria-labelledby="mainHeaderProfile">
+                        <li><a class="dropdown-item d-flex align-items-center" href="profile.html"><i
+                                    class="ti ti-user me-2 fs-18 text-primary"></i>Profile</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="mail.html"><i
+                                    class="ti ti-mail me-2 fs-18 text-secondary"></i>Inbox</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="to-do-list.html"><i
+                                    class="ti ti-checklist me-2 fs-18 text-success"></i>Task Manager</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="mail-settings.html"><i
+                                    class="ti ti-settings me-2 fs-18 text-orange"></i>Settings</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="chat.html"><i
+                                    class="ti ti-headset me-2 fs-18 text-info"></i>Support</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center" href="sign-in-cover.html"><i
+                                    class="ti ti-logout me-2 fs-18 text-warning"></i>Log Out</a></li>
+                    </ul>
+                </li> <!-- End::header-element --> <!-- Start::header-element -->
+                <li class="header-element"> <!-- Start::header-link|switcher-icon --> <a href="javascript:void(0);"
+                        class="header-link switcher-icon" data-bs-toggle="offcanvas" data-bs-target="#switcher-canvas">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="header-link-icon" width="32" height="32"
+                            fill="#000000" viewBox="0 0 256 256">
+                            <path
+                                d="M230.1,108.76,198.25,90.62c-.64-1.16-1.31-2.29-2-3.41l-.12-36A104.61,104.61,0,0,0,162,32L130,49.89c-1.34,0-2.69,0-4,0L94,32A104.58,104.58,0,0,0,59.89,51.25l-.16,36c-.7,1.12-1.37,2.26-2,3.41l-31.84,18.1a99.15,99.15,0,0,0,0,38.46l31.85,18.14c.64,1.16,1.31,2.29,2,3.41l.12,36A104.61,104.61,0,0,0,94,224l32-17.87c1.34,0,2.69,0,4,0L162,224a104.58,104.58,0,0,0,34.08-19.25l.16-36c.7-1.12,1.37-2.26,2-3.41l31.84-18.1A99.15,99.15,0,0,0,230.1,108.76ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z"
+                                opacity="0.1"></path>
+                            <path
+                                d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm109.94-52.79a8,8,0,0,0-3.89-5.4l-29.83-17-.12-33.62a8,8,0,0,0-2.83-6.08,111.91,111.91,0,0,0-36.72-20.67,8,8,0,0,0-6.46.59L128,41.85,97.88,25a8,8,0,0,0-6.47-.6A111.92,111.92,0,0,0,54.73,45.15a8,8,0,0,0-2.83,6.07l-.15,33.65-29.83,17a8,8,0,0,0-3.89,5.4,106.47,106.47,0,0,0,0,41.56,8,8,0,0,0,3.89,5.4l29.83,17,.12,33.63a8,8,0,0,0,2.83,6.08,111.91,111.91,0,0,0,36.72,20.67,8,8,0,0,0,6.46-.59L128,214.15,158.12,231a7.91,7.91,0,0,0,3.9,1,8.09,8.09,0,0,0,2.57-.42,112.1,112.1,0,0,0,36.68-20.73,8,8,0,0,0,2.83-6.07l.15-33.65,29.83-17a8,8,0,0,0,3.89-5.4A106.47,106.47,0,0,0,237.94,107.21Zm-15,34.91-28.57,16.25a8,8,0,0,0-3,3c-.58,1-1.19,2.06-1.81,3.06a7.94,7.94,0,0,0-1.22,4.21l-.15,32.25a95.89,95.89,0,0,1-25.37,14.3L134,199.13a8,8,0,0,0-3.91-1h-.19c-1.21,0-2.43,0-3.64,0a8.1,8.1,0,0,0-4.1,1l-28.84,16.1A96,96,0,0,1,67.88,201l-.11-32.2a8,8,0,0,0-1.22-4.22c-.62-1-1.23-2-1.8-3.06a8.09,8.09,0,0,0-3-3.06l-28.6-16.29a90.49,90.49,0,0,1,0-28.26L61.67,97.63a8,8,0,0,0,3-3c.58-1,1.19-2.06,1.81-3.06a7.94,7.94,0,0,0,1.22-4.21l.15-32.25a95.89,95.89,0,0,1,25.37-14.3L122,56.87a8,8,0,0,0,4.1,1c1.21,0,2.43,0,3.64,0a8,8,0,0,0,4.1-1l28.84-16.1A96,96,0,0,1,188.12,55l.11,32.2a8,8,0,0,0,1.22,4.22c.62,1,1.23,2,1.8,3.06a8.09,8.09,0,0,0,3,3.06l28.6,16.29A90.49,90.49,0,0,1,222.9,142.12Z">
+                            </path>
+                        </svg> </a> <!-- End::header-link|switcher-icon --> </li> <!-- End::header-element -->
+            </ul>
+        </div> <!-- End::main-header-container -->
+    </header> <!-- /app-header --> <!-- Start::app-sidebar -->
+    <aside class="app-sidebar sticky sticky-pin" id="sidebar"> <!-- Start::main-sidebar-header -->
+        <div class="main-sidebar-header"> <a href="index.html" class="header-logo"> <img
+                    src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo"> <img
+                    src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark"> <img
+                    src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img
+                    src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo"> </a> </div>
+        <!-- End::main-sidebar-header --> <!-- Start::main-sidebar -->
+        <div class="main-sidebar simplebar-scrollable-y" id="sidebar-scroll" data-simplebar="init">
+            <div class="simplebar-wrapper" style="margin: -8px 0px -80px;">
+                <div class="simplebar-height-auto-observer-wrapper">
+                    <div class="simplebar-height-auto-observer"></div>
+                </div>
+                <div class="simplebar-mask">
+                    <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                        <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                            aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
+                            <div class="simplebar-content" style="padding: 8px 0px 80px;"> <!-- Start::nav -->
+                                <nav class="main-menu-container nav nav-pills flex-column sub-open active open">
+                                    <div class="slide-left active open d-none" id="slide-left"> <svg
+                                            xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z">
+                                            </path>
+                                        </svg> </div>
+                                    <ul class="main-menu" style="margin-left: 0px; margin-right: 0px;">
+                                        <!-- Start::slide__category -->
+                                        <li class="slide__category"><span class="category-name">Main</span></li>
+                                        <!-- End::slide__category --> <!-- Start::slide -->
+                                        <li class="slide has-sub active open"> <a href="javascript:void(0);"
+                                                class="side-menu__item active open"> <i
+                                                    class="ri-arrow-down-s-line side-menu__angle"></i> <svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                                    width="32" height="32" viewBox="0 0 256 256">
+                                                    <path
+                                                        d="M216,115.54V208a8,8,0,0,1-8,8H160a8,8,0,0,1-8-8V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.54a8,8,0,0,1,2.62-5.92l80-75.54a8,8,0,0,1,10.77,0l80,75.54A8,8,0,0,1,216,115.54Z"
+                                                        opacity="0.2"></path>
+                                                    <path
+                                                        d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Dashboards</span> </a>
+                                            <ul class="slide-menu child1"
+                                                style="position: relative; left: 0px; top: 0px; margin: 0px; display: block; transform: translate3d(9.6px, 727.2px, 0px);"
+                                                data-popper-escaped="" data-popper-placement="bottom">
+                                                <li class="slide side-menu__label1"> <a
+                                                        href="javascript:void(0)">Dashboards</a> </li>
+                                                <li class="slide active open"> <a href="index.html"
+                                                        class="side-menu__item active">Sales</a> </li>
+                                                <li class="slide"> <a href="index-1.html"
+                                                        class="side-menu__item">Analytics</a> </li>
+                                                <li class="slide"> <a href="index-2.html"
+                                                        class="side-menu__item">Ecommerce</a> </li>
+                                                <li class="slide"> <a href="index-3.html"
+                                                        class="side-menu__item">CRM</a> </li>
+                                                <li class="slide"> <a href="index-4.html"
+                                                        class="side-menu__item">Crypto</a> </li>
+                                                <li class="slide"> <a href="index-5.html"
+                                                        class="side-menu__item">NFT</a> </li>
+                                                <li class="slide"> <a href="index-6.html"
+                                                        class="side-menu__item">Projects</a> </li>
+                                                <li class="slide"> <a href="index-7.html"
+                                                        class="side-menu__item">Jobs</a> </li>
+                                                <li class="slide"> <a href="index-8.html"
+                                                        class="side-menu__item">HRM</a> </li>
+                                                <li class="slide"> <a href="index-9.html"
+                                                        class="side-menu__item">Courses</a> </li>
+                                                <li class="slide"> <a href="index-10.html"
+                                                        class="side-menu__item">Stocks</a> </li>
+                                                <li class="slide"> <a href="index-11.html"
+                                                        class="side-menu__item">Medical</a> </li>
+                                                <li class="slide"> <a href="index-12.html" class="side-menu__item">POS
+                                                        System</a> </li>
+                                                <li class="slide"> <a href="index-13.html"
+                                                        class="side-menu__item">Podcast</a> </li>
+                                                <li class="slide"> <a href="index-14.html"
+                                                        class="side-menu__item">School</a> </li>
+                                                <li class="slide"> <a href="index-15.html"
+                                                        class="side-menu__item">Social Media</a> </li>
+                                            </ul>
+                                        </li> <!-- End::slide --> <!-- Start::slide__category -->
+
+                                        <li class="slide"> <a href="widgets.html" class="side-menu__item"> <svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                                    width="32" height="32" viewBox="0 0 256 256">
+                                                    <path d="M208,128v72a8,8,0,0,1-8,8H56a8,8,0,0,1-8-8V128Z"
+                                                        opacity="0.2"></path>
+                                                    <path
+                                                        d="M216,72H180.92c.39-.33.79-.65,1.17-1A29.53,29.53,0,0,0,192,49.57,32.62,32.62,0,0,0,158.44,16,29.53,29.53,0,0,0,137,25.91a54.94,54.94,0,0,0-9,14.48,54.94,54.94,0,0,0-9-14.48A29.53,29.53,0,0,0,97.56,16,32.62,32.62,0,0,0,64,49.57,29.53,29.53,0,0,0,73.91,71c.38.33.78.65,1.17,1H40A16,16,0,0,0,24,88v32a16,16,0,0,0,16,16v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V136a16,16,0,0,0,16-16V88A16,16,0,0,0,216,72ZM149,36.51a13.69,13.69,0,0,1,10-4.5h.49A16.62,16.62,0,0,1,176,49.08a13.69,13.69,0,0,1-4.5,10c-9.49,8.4-25.24,11.36-35,12.4C137.7,60.89,141,45.5,149,36.51Zm-64.09.36A16.63,16.63,0,0,1,96.59,32h.49a13.69,13.69,0,0,1,10,4.5c8.39,9.48,11.35,25.2,12.39,34.92-9.72-1-25.44-4-34.92-12.39a13.69,13.69,0,0,1-4.5-10A16.6,16.6,0,0,1,84.87,36.87ZM40,88h80v32H40Zm16,48h64v64H56Zm144,64H136V136h64Zm16-80H136V88h80v32Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Widgets</span> </a> </li>
+                                        <!-- End::slide --> <!-- Start::slide__category -->
+                                        <li class="slide__category"><span class="category-name">Maps &amp;
+                                                Icons</span></li> <!-- End::slide__category -->
+                                        <!-- Start::slide -->
+                                        <li class="slide has-sub"> <a href="javascript:void(0);"
+                                                class="side-menu__item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="side-menu__icon" width="32" height="32"
+                                                    viewBox="0 0 256 256">
+                                                    <path
+                                                        d="M128,32a96,96,0,1,0,96,96A96,96,0,0,0,128,32Zm16,112L80,176l32-64,64-32Z"
+                                                        opacity="0.2"></path>
+                                                    <path
+                                                        d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM172.42,72.84l-64,32a8.05,8.05,0,0,0-3.58,3.58l-32,64A8,8,0,0,0,80,184a8.1,8.1,0,0,0,3.58-.84l64-32a8.05,8.05,0,0,0,3.58-3.58l32-64a8,8,0,0,0-10.74-10.74ZM138,138,97.89,158.11,118,118l40.15-20.07Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Maps</span> <i
+                                                    class="ri-arrow-down-s-line side-menu__angle"></i> </a>
+                                            <ul class="slide-menu child1"
+                                                style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(127.2px, 2875.2px, 0px);"
+                                                data-popper-reference-hidden="" data-popper-escaped=""
+                                                data-popper-placement="top">
+                                                <li class="slide side-menu__label1"> <a
+                                                        href="javascript:void(0)">Maps</a> </li>
+                                                <li class="slide"> <a href="vector-maps.html"
+                                                        class="side-menu__item">Vector Maps</a> </li>
+                                                <li class="slide"> <a href="leaflet-maps.html"
+                                                        class="side-menu__item">Leaflet Maps</a> </li>
+                                                <li class="slide"> <a href="google-maps.html"
+                                                        class="side-menu__item">Google Maps</a> </li>
+                                            </ul>
+                                        </li> <!-- End::slide --> <!-- Start::slide -->
+                                        <li class="slide"> <a href="icons.html" class="side-menu__item"> <svg
+                                                    xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
+                                                    width="32" height="32" viewBox="0 0 256 256">
+                                                    <path
+                                                        d="M224,96v16a32,32,0,0,1-64,0V96H96v16a32,32,0,0,1-64,0V96L46.34,45.8A8,8,0,0,1,54,40H202a8,8,0,0,1,7.69,5.8Z"
+                                                        opacity="0.2"></path>
+                                                    <path
+                                                        d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96v16a40,40,0,0,0,16,32v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V144a40,40,0,0,0,16-32ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-48,0v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm-8-72a24,24,0,0,1-24-24v-8h48v8A24,24,0,0,1,192,136Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Icons</span> </a> </li>
+                                        <!-- End::slide --> <!-- Start::slide__category -->
+                                        <li class="slide__category"><span class="category-name">Tables &amp;
+                                                Charts</span></li> <!-- End::slide__category -->
+                                        <!-- Start::slide -->
+                                        <li class="slide has-sub"> <a href="javascript:void(0);"
+                                                class="side-menu__item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="side-menu__icon" width="32" height="32"
+                                                    viewBox="0 0 256 256">
+                                                    <path d="M208,40V208H152V40Z" opacity="0.2"></path>
+                                                    <path
+                                                        d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Charts</span> <i
+                                                    class="ri-arrow-down-s-line side-menu__angle"></i> </a>
+                                            <ul class="slide-menu child1"
+                                                style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(127.2px, 3011.2px, 0px);"
+                                                data-popper-reference-hidden="" data-popper-escaped=""
+                                                data-popper-placement="top">
+                                                <li class="slide side-menu__label1"> <a
+                                                        href="javascript:void(0)">Charts</a> </li>
+                                                <li class="slide has-sub"> <a href="javascript:void(0);"
+                                                        class="side-menu__item">Apex Charts <i
+                                                            class="ri-arrow-down-s-line side-menu__angle"></i></a>
+                                                    <ul class="slide-menu child2">
+                                                        <li class="slide"> <a href="apex-line-charts.html"
+                                                                class="side-menu__item">Line Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-area-charts.html"
+                                                                class="side-menu__item">Area Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-column-charts.html"
+                                                                class="side-menu__item">Column Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-bar-charts.html"
+                                                                class="side-menu__item">Bar Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-mixed-charts.html"
+                                                                class="side-menu__item">Mixed Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-rangearea-charts.html"
+                                                                class="side-menu__item">Range Area Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-timeline-charts.html"
+                                                                class="side-menu__item">Timeline Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-funnel-charts.html"
+                                                                class="side-menu__item">Funnel Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-candlestick-charts.html"
+                                                                class="side-menu__item">CandleStick Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-boxplot-charts.html"
+                                                                class="side-menu__item">Boxplot Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-bubble-charts.html"
+                                                                class="side-menu__item">Bubble Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-scatter-charts.html"
+                                                                class="side-menu__item">Scatter Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-heatmap-charts.html"
+                                                                class="side-menu__item">Heatmap Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-treemap-charts.html"
+                                                                class="side-menu__item">Treemap Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-pie-charts.html"
+                                                                class="side-menu__item">Pie Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-radialbar-charts.html"
+                                                                class="side-menu__item">Radialbar Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-radar-charts.html"
+                                                                class="side-menu__item">Radar Charts</a> </li>
+                                                        <li class="slide"> <a href="apex-polararea-charts.html"
+                                                                class="side-menu__item">Polararea Charts</a> </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="slide"> <a href="chartjs-charts.html"
+                                                        class="side-menu__item">Chartjs Charts</a> </li>
+                                                <li class="slide"> <a href="echarts.html" class="side-menu__item">Echart
+                                                        Charts</a> </li>
+                                            </ul>
+                                        </li> <!-- End::slide --> <!-- Start::slide -->
+                                        <li class="slide has-sub"> <a href="javascript:void(0);"
+                                                class="side-menu__item"> <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="side-menu__icon" width="32" height="32"
+                                                    viewBox="0 0 256 256">
+                                                    <path d="M88,104v96H32V104Z" opacity="0.2"></path>
+                                                    <path
+                                                        d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM40,112H80v32H40Zm56,0H216v32H96ZM216,64V96H40V64ZM40,160H80v32H40Zm176,32H96V160H216v32Z">
+                                                    </path>
+                                                </svg> <span class="side-menu__label">Tables</span> <i
+                                                    class="ri-arrow-down-s-line side-menu__angle"></i> </a>
+                                            <ul class="slide-menu child1"
+                                                style="position: relative; left: 0px; top: 0px; margin: 0px; transform: translate3d(127.2px, 3060px, 0px);"
+                                                data-popper-reference-hidden="" data-popper-escaped=""
+                                                data-popper-placement="top">
+                                                <li class="slide side-menu__label1"> <a
+                                                        href="javascript:void(0)">Tables</a> </li>
+                                                <li class="slide"> <a href="tables.html"
+                                                        class="side-menu__item">Tables</a> </li>
+                                                <li class="slide"> <a href="grid-tables.html"
+                                                        class="side-menu__item">Grid JS Tables</a> </li>
+                                                <li class="slide"> <a href="data-tables.html"
+                                                        class="side-menu__item">Data Tables</a> </li>
+                                            </ul>
+                                        </li> <!-- End::slide -->
+                                    </ul>
+                                    <div class="slide-right d-none" id="slide-right"><svg
+                                            xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
+                                            viewBox="0 0 24 24">
+                                            <path
+                                                d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z">
+                                            </path>
+                                        </svg></div>
+                                </nav> <!-- End::nav -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="simplebar-placeholder" style="width: 255px; height: 1699px;"></div>
+            </div>
+            <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                <div class="simplebar-scrollbar" style="width: 0px; display: none;"></div>
+            </div>
+            <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+                <div class="simplebar-scrollbar"
+                    style="height: 116px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+            </div>
+        </div> <!-- End::main-sidebar -->
+    </aside> <!-- End::app-sidebar --> <!-- Start::app-content -->
+    
+    <div class="main-content app-content">
+        @Body
+</div>
 </div>
 
+
+
+
+
+
+
+<script src="assets2/libs/@@popperjs/core/umd/popper.min.js"></script>
+
+<script src="assets2/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="assets2/js/defaultmenu.min.js"></script>
+
+
+<script src="assets2/libs/node-waves/waves.min.js"></script>
+
+<script src="assets2/js/sticky.js"></script>
+
+<script src="assets2/libs/simplebar/simplebar.min.js"></script>
+
+<script src="assets2/js/simplebar.js"></script>
+
+<script src="assets2/libs/@@tarekraafat/autocomplete.js/autoComplete.min.js"></script>
+
+<script src="assets2/libs/@@simonwep/pickr/pickr.es5.min.js"></script>
+
+<script src="assets2/libs/flatpickr/flatpickr.min.js"></script>
+
+<script src="assets2/libs/apexcharts/apexcharts.min.js"></script>
+
+
+
+<script src="assets2/js/custom.js"></script>
+
+
 @code {
+
 }

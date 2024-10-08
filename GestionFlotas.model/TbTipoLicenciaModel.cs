@@ -1,8 +1,8 @@
 ﻿namespace GestionFlotas.model
 {
-    public class TbVehiculoTipoModel
+	public class TbTipoLicenciaModel
 	{
-		public short TbVehiculoTipoId { get; set; }
+		public short TbTipoLicenciaId { get; set; }
 
 		public string? Nombre { get; set; }
 
@@ -11,7 +11,7 @@
 		// Variables Virtuales
 		public string? ActivoString { get; set; }
 
-		public TbVehiculoTipoModel() 
+		public TbTipoLicenciaModel()
 		{
 			Activo = true;
 		}

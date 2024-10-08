@@ -1,8 +1,8 @@
 ﻿namespace GestionFlotas.model
 {
-	public class TbPersonaCargoModel
+	public class TbTipoCargaModel
 	{
-		public short TbPersonaCargoId { get; set; }
+		public short TbTipoCargaId { get; set; }
 
 		public string? Nombre { get; set; }
 
@@ -11,7 +11,7 @@
 		// Variables Virtuales
 		public string? ActivoString { get; set; }
 
-		public TbPersonaCargoModel()
+		public TbTipoCargaModel()
 		{
 			Activo = true;
 		}

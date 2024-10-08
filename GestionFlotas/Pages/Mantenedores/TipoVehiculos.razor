@@ -14,80 +14,88 @@
 @inject DialogService DialogService
 @inject IJSRuntime JSRuntime
 
-<div class="h-[calc(100vh-60px)]  relative overflow-y-auto overflow-x-hidden p-4 space-y-4 detached-content">
-
-	<nav class="w-full">
-		<ul class="space-y-2 detached-breadcrumb">
-			<li class="text-xs dark:text-white/80">Mantenedor</li>
-			<li class="text-xl font-semibold text-slate-800 dark:text-slate-100">Tipos de vehículos</li>
-		</ul>
-	</nav>
-	<!-- Start All Card -->
-
-	<div class="card">
-		<div style="overflow:auto !important">
-			<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start">
-				<RadzenButton ButtonStyle="Radzen.ButtonStyle.Primary" Icon="add_circle_outline" Text="Nuevo" Style="margin: 10px" Click="@(() => EditarForm(new TbVehiculoTipoModel()))" />
-			</RadzenStack>
-			<br />
-			<RadzenDataGrid @ref="grid" LoadData=@LoadData style="display: flex; align-items: center; gap: 0.5rem; width:100%; min-width:700px !important"
-							Data="@tipoVehiculoGrid"
-							AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true"
-							PageSize="20" AllowPaging="true" PagerHorizontalAlign="Radzen.HorizontalAlign.Center" ShowPagingSummary="true"
-							TItem="TbVehiculoTipoModel" LogicalFilterOperator="LogicalFilterOperator.Or" ClearFilterText="Limpiar filtros" ApplyFilterText="Aplicar"
-							AndOperatorText="Y" AllowGrouping="false" AllColumnsText="Todas las columnas" ContainsText="Contiene" Density="Radzen.Density.Default"
-							DoesNotContainText="No contiene" EmptyText="No hay registros..." EndsWithText="Termina con" EnumFilterSelectText="Selecciona..."
-							EnumNullFilterText="Sin valor" EqualsText="Igual" FilterText="Filtro" FirstPageAriaLabel="Ir a la primera página" FirstPageTitle="Primera página"
-							GreaterThanOrEqualsText="Mayor o igual a" GreaterThanText="Mayor a" IsEmptyText="Está vacio" IsNotEmptyText="No está vacío" IsNotNullText="No es nulo"
-							IsNullText="Es nulo" KeyProperty="TbVehiculoTipoId" LastPageAriaLabel="Ir a la última página" LastPageTitle="Última página" LessThanOrEqualsText="Menor o igual que"
-							LessThanText="Menor que" NextPageAriaLabel="Ir a la siguiente página" NextPageTitle="Siguiente" NotEqualsText="No es igual a" OrOperatorText="o"
-							PageAriaLabelFormat="Ir a la página [0]" PagerAlwaysVisible="false" PagerPosition="Radzen.PagerPosition.Bottom" PageSizeText="Registros por página"
-							PageTitleFormat="Página [0]" PagingSummaryFormat="Página [0] de [1] ([2] Registros)" PrevPageAriaLabel="Ir a la página anterior"
-							PrevPageTitle="Anterior" Responsive="false" StartsWithText="Comienza con" GridLines="Radzen.DataGridGridLines.Horizontal">
-				<Columns>
-					<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property=" TbVehiculoTipoId" Filterable="false" Resizable="false" Title="ID" Visible="false" />
-					<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="Nombre" Title="Nombre" Filterable=false Sortable=false />
-					<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="ActivoString" Title="Activo" Filterable=false Sortable=false TextAlign="TextAlign.Center" />
-					<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="TbVehiculoTipoId" Title="Editar" Filterable=false Sortable=false Width="75px">
-						<Template Context="data">
-							<RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="drive_file_rename_outline" class="m-1" Click=@(() => EditarForm(data)) />
-						</Template>
-					</RadzenDataGridColumn>
-					<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="TbVehiculoTipoId" Title="Eliminar" Filterable=false Sortable=false Width="75px">
-						<Template Context="data">
-							<RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="delete_sweep" class="m-1" Click=@(() => ShowDeleteDialog(data)) />
-						</Template>
-					</RadzenDataGridColumn>
-				</Columns>
-			</RadzenDataGrid>
+<div class="container-fluid">
+	<!-- Start::page-header -->
+	<div class="row">
+		<div class="col-xl-12">
+			<div class="card custom-card">
+				<div class="card-header justify-content-between">
+					<div class="card-title"> Tipos de vehiculos </div>
+					<div class="d-flex flex-wrap gap-2">
+						<div>
+							<button class="btn btn-primary m-1" @onclick="() => EditarForm(new TbVehiculoTipoModel())">
+								<i class="bi bi-plus-circle"></i>
+								Nuevo
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<div class="table-responsive">
+						<RadzenDataGrid @ref="grid" LoadData=@LoadData style="display: flex; align-items: center; gap: 0.5rem; width:100%; min-width:700px !important"
+										Data="@tipoVehiculoGrid"
+										AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true"
+										PageSize="20" AllowPaging="true" PagerHorizontalAlign="Radzen.HorizontalAlign.Center" ShowPagingSummary="true"
+										TItem="TbVehiculoTipoModel" LogicalFilterOperator="LogicalFilterOperator.Or" ClearFilterText="Limpiar filtros" ApplyFilterText="Aplicar"
+										AndOperatorText="Y" AllowGrouping="false" AllColumnsText="Todas las columnas" ContainsText="Contiene" Density="Radzen.Density.Default"
+										DoesNotContainText="No contiene" EmptyText="No hay registros..." EndsWithText="Termina con" EnumFilterSelectText="Selecciona..."
+										EnumNullFilterText="Sin valor" EqualsText="Igual" FilterText="Filtro" FirstPageAriaLabel="Ir a la primera página" FirstPageTitle="Primera página"
+										GreaterThanOrEqualsText="Mayor o igual a" GreaterThanText="Mayor a" IsEmptyText="Está vacio" IsNotEmptyText="No está vacío" IsNotNullText="No es nulo"
+										IsNullText="Es nulo" KeyProperty="TbVehiculoTipoId" LastPageAriaLabel="Ir a la última página" LastPageTitle="Última página" LessThanOrEqualsText="Menor o igual que"
+										LessThanText="Menor que" NextPageAriaLabel="Ir a la siguiente página" NextPageTitle="Siguiente" NotEqualsText="No es igual a" OrOperatorText="o"
+										PageAriaLabelFormat="Ir a la página [0]" PagerAlwaysVisible="false" PagerPosition="Radzen.PagerPosition.Bottom" PageSizeText="Registros por página"
+										PageTitleFormat="Página [0]" PagingSummaryFormat="Página [0] de [1] ([2] Registros)" PrevPageAriaLabel="Ir a la página anterior"
+										PrevPageTitle="Anterior" Responsive="false" StartsWithText="Comienza con" GridLines="Radzen.DataGridGridLines.Horizontal">
+							<Columns>
+								<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property=" TbVehiculoTipoId" Filterable="false" Resizable="false" Title="ID" Visible="false" />
+								<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="Nombre" Title="Nombre" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="ActivoString" Title="Activo" Filterable=false Sortable=false TextAlign="TextAlign.Center" />
+								<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="TbVehiculoTipoId" Title="Editar" Filterable=false Sortable=false Width="75px">
+									<Template Context="data">
+										<RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="drive_file_rename_outline" class="m-1" Click=@(() => EditarForm(data)) />
+									</Template>
+								</RadzenDataGridColumn>
+								<RadzenDataGridColumn TItem="TbVehiculoTipoModel" Property="TbVehiculoTipoId" Title="Eliminar" Filterable=false Sortable=false Width="75px">
+									<Template Context="data">
+										<RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="delete_sweep" class="m-1" Click=@(() => ShowDeleteDialog(data)) />
+									</Template>
+								</RadzenDataGridColumn>
+							</Columns>
+						</RadzenDataGrid>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<Modal @ref="modal" Title="Tipo vehículo" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
-		<BodyTemplate>
-			<RadzenTemplateForm TItem="TbVehiculoTipoModel" Data="@TipoVehiculoSelecionado" Submit="OnSubmit">
-				<RadzenRow Style="padding: 5px">
-					<RadzenColumn Size="12" SizeMD="2">
-						<RadzenLabel Component="txtNombre" style="width: 100%; padding-left: 5px" Text="Nombre:"></RadzenLabel>
-					</RadzenColumn>
-					<RadzenColumn Size="12" SizeMD="10">
-						<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@TipoVehiculoSelecionado.Nombre"></RadzenTextBox>
-						<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
-					</RadzenColumn>
-				</RadzenRow>
-				<RadzenRow Style="padding: 5px">
-					<RadzenColumn Size="12">
-						<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
-						<RadzenCheckBox @bind-Value="@TipoVehiculoSelecionado.Activo" Name="chkActivo" />
-					</RadzenColumn>
-				</RadzenRow>
-				<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End">
-					<RadzenButton @ref="btnGuardar" ButtonStyle="Radzen.ButtonStyle.Info" ButtonType="Radzen.ButtonType.Submit" Icon="save" Text="Guardar" Variant="Radzen.Variant.Flat" Style="margin: 10px" />
-				</RadzenStack>
-			</RadzenTemplateForm>
-		</BodyTemplate>
-	</Modal>
 </div>
+
+<Modal @ref="modal" Title="Tipo vehículo" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
+	<BodyTemplate>
+		<RadzenTemplateForm TItem="TbVehiculoTipoModel" Data="@TipoVehiculoSelecionado" Submit="OnSubmit">
+			<RadzenRow Style="padding: 5px">
+				<RadzenColumn Size="12" SizeMD="2">
+					<RadzenLabel Component="txtNombre" style="width: 100%; padding-left: 5px" Text="Nombre:"></RadzenLabel>
+				</RadzenColumn>
+				<RadzenColumn Size="12" SizeMD="10">
+					<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@TipoVehiculoSelecionado.Nombre"></RadzenTextBox>
+					<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
+				</RadzenColumn>
+			</RadzenRow>
+			<RadzenRow Style="padding: 5px">
+				<RadzenColumn Size="12">
+					<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
+					<RadzenCheckBox @bind-Value="@TipoVehiculoSelecionado.Activo" Name="chkActivo" />
+				</RadzenColumn>
+			</RadzenRow>
+			<div style="text-align:right" class="col-md-12">
+				<button class="btn btn-info m-1"  >
+					<i class="bi bi-floppy"></i>
+					Guardar
+				</button>
+			</div>
+		</RadzenTemplateForm>
+	</BodyTemplate>
+</Modal>
 
 @code {
 	private Modal modal = default!;
@@ -96,8 +104,7 @@
 	RadzenDataGrid<TbVehiculoTipoModel?> grid = null!;
 	bool isWaiting = true;
 	int count;
-	RadzenButton btnGuardar;
-
+	
 	// List<TbPerfilModel?> perfiles;
 	// List<TbPersonaModel?> personas;
 
@@ -184,64 +191,62 @@
 
 	async Task ShowDeleteDialog(TbVehiculoTipoModel registro)
 	{
-			try
-			{
+		try
+		{
 			using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
-				{
-					// ubl = new TbUsuarioBL(_db);
-					// if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 241)) // Privilegio para eliminar
-					// 	throw new Exception("Usted no tiene acceso para realizar esta operación");
-					// else
-					// {
-
-						var result = await DialogService.OpenAsync("Confirmación eliminación de registro", ds =>
-		@<RadzenStack Gap="1.5rem">
-			<div class="row mb-3">
-				<h4>Va a eliminar este registro, ¿Desea continuar?</h4>
-			</div>
-			<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-				<RadzenStack Orientation="Radzen.Orientation.Horizontal">
-					<RadzenButton Text="Si" Click="() => ds.Close(true)" ButtonStyle="ButtonStyle.Danger" class="w-50" />
-					<RadzenButton Text="No" Click="() => ds.Close(false)" ButtonStyle="ButtonStyle.Light" class="w-50" />
-				</RadzenStack>
-			</RadzenStack>
-		</RadzenStack>);
-						if (result != null)
-						{
-							if (result && registro != null)
-							{
-								try
-								{
-								using (var _dbModules = ContextFactoryGestionFlotas.CreateDbContext())
-									{
-										await new TbVehiculoTipoBL(_dbModules).Eliminar(registro.TbVehiculoTipoId);
-									}
-									await grid.Reload();
-									ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Registro eliminado exitosamente", Duration = 2000 });
-								}
-								catch (Exception ex)
-								{
-									ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = ex.Message, Duration = 2000 });
-								}
-
-							}
-						}
-					// }
-				}
-
-			}
-			catch (Exception ex)
 			{
-				ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = ex.Message, Duration = 2000 });
+				// ubl = new TbUsuarioBL(_db);
+				// if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 241)) // Privilegio para eliminar
+				// 	throw new Exception("Usted no tiene acceso para realizar esta operación");
+				// else
+				// {
+
+				var result = await DialogService.OpenAsync("Confirmación eliminación de registro", ds =>
+	@<RadzenStack Gap="1.5rem">
+		<div class="row mb-3">
+			<h4>Va a eliminar este registro, ¿Desea continuar?</h4>
+		</div>
+		<RadzenStack Orientation="Radzen.Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+			<RadzenStack Orientation="Radzen.Orientation.Horizontal">
+				<RadzenButton Text="Si" Click="() => ds.Close(true)" ButtonStyle="ButtonStyle.Danger" class="w-50" />
+				<RadzenButton Text="No" Click="() => ds.Close(false)" ButtonStyle="ButtonStyle.Light" class="w-50" />
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenStack>);
+				if (result != null)
+				{
+					if (result && registro != null)
+					{
+						try
+						{
+							using (var _dbModules = ContextFactoryGestionFlotas.CreateDbContext())
+							{
+								await new TbVehiculoTipoBL(_dbModules).Eliminar(registro.TbVehiculoTipoId);
+							}
+							await grid.Reload();
+							ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Registro eliminado exitosamente", Duration = 2000 });
+						}
+						catch (Exception ex)
+						{
+							ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = ex.Message, Duration = 2000 });
+						}
+
+					}
+				}
+				// }
 			}
+
+		}
+		catch (Exception ex)
+		{
+			ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = ex.Message, Duration = 2000 });
+		}
 	}
 
 	async void OnSubmit()
 	{
 		try
 		{
-			btnGuardar.Disabled = true;
-
 			isWaiting = true;
 
 			using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
@@ -262,7 +267,6 @@
 		{
 
 			isWaiting = false;
-			btnGuardar.Disabled = false;
 		}
 	}
 

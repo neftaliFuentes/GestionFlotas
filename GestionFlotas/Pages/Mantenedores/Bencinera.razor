@@ -1,4 +1,4 @@
-﻿@page "/Mantenedores/TipoCarga"
+﻿@page "/Mantenedores/Bencinera"
 @layout MainLayout
 
 @using BlazorBootstrap
@@ -20,10 +20,10 @@
 		<div class="col-xl-12">
 			<div class="card custom-card">
 				<div class="card-header justify-content-between">
-					<div class="card-title"> Tipos de carga </div>
+					<div class="card-title"> Bencineras </div>
 					<div class="d-flex flex-wrap gap-2">
 						<div>
-							<button class="btn btn-primary m-1" @onclick="() => EditarForm(new TbTipoCargaModel())">
+							<button class="btn btn-primary m-1" @onclick="() => EditarForm(new TbBencineraModel())">
 								<i class="bi bi-plus-circle"></i>
 								Nuevo
 							</button>
@@ -33,29 +33,30 @@
 				<div class="card-body p-0">
 					<div class="table-responsive">
 						<RadzenDataGrid @ref="grid" LoadData=@LoadData style="display: flex; align-items: center; gap: 0.5rem; width:100%; min-width:700px !important"
-										Data="@tipoCargaGrid"
+										Data="@bencineraGrid"
 										AllowFiltering="true" AllowColumnResize="false" AllowAlternatingRows="false" FilterMode="FilterMode.Advanced" AllowSorting="true"
 										PageSize="20" AllowPaging="true" PagerHorizontalAlign="Radzen.HorizontalAlign.Center" ShowPagingSummary="true"
-										TItem="TbTipoCargaModel" LogicalFilterOperator="LogicalFilterOperator.Or" ClearFilterText="Limpiar filtros" ApplyFilterText="Aplicar"
+										TItem="TbBencineraModel" LogicalFilterOperator="LogicalFilterOperator.Or" ClearFilterText="Limpiar filtros" ApplyFilterText="Aplicar"
 										AndOperatorText="Y" AllowGrouping="false" AllColumnsText="Todas las columnas" ContainsText="Contiene" Density="Radzen.Density.Default"
 										DoesNotContainText="No contiene" EmptyText="No hay registros..." EndsWithText="Termina con" EnumFilterSelectText="Selecciona..."
 										EnumNullFilterText="Sin valor" EqualsText="Igual" FilterText="Filtro" FirstPageAriaLabel="Ir a la primera página" FirstPageTitle="Primera página"
 										GreaterThanOrEqualsText="Mayor o igual a" GreaterThanText="Mayor a" IsEmptyText="Está vacio" IsNotEmptyText="No está vacío" IsNotNullText="No es nulo"
-										IsNullText="Es nulo" KeyProperty="TbTipoCargaId" LastPageAriaLabel="Ir a la última página" LastPageTitle="Última página" LessThanOrEqualsText="Menor o igual que"
+										IsNullText="Es nulo" KeyProperty="TbBencineraId" LastPageAriaLabel="Ir a la última página" LastPageTitle="Última página" LessThanOrEqualsText="Menor o igual que"
 										LessThanText="Menor que" NextPageAriaLabel="Ir a la siguiente página" NextPageTitle="Siguiente" NotEqualsText="No es igual a" OrOperatorText="o"
 										PageAriaLabelFormat="Ir a la página [0]" PagerAlwaysVisible="false" PagerPosition="Radzen.PagerPosition.Bottom" PageSizeText="Registros por página"
 										PageTitleFormat="Página [0]" PagingSummaryFormat="Página [0] de [1] ([2] Registros)" PrevPageAriaLabel="Ir a la página anterior"
 										PrevPageTitle="Anterior" Responsive="false" StartsWithText="Comienza con" GridLines="Radzen.DataGridGridLines.Horizontal">
 							<Columns>
-								<RadzenDataGridColumn TItem="TbTipoCargaModel" Property="TbTipoCargaId" Filterable="false" Resizable="false" Title="ID" Visible="false" />
-								<RadzenDataGridColumn TItem="TbTipoCargaModel" Property="Nombre" Title="Nombre" Filterable=false Sortable=false />
-								<RadzenDataGridColumn TItem="TbTipoCargaModel" Property="ActivoString" Title="Activo" Filterable=false Sortable=false TextAlign="TextAlign.Center" />
-								<RadzenDataGridColumn TItem="TbTipoCargaModel" Property="TbTipoCargaId" Title="Editar" Filterable=false Sortable=false Width="75px">
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property=" TbBencineraId" Filterable="false" Resizable="false" Title="ID" Visible="false" />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="Nombre" Title="Nombre" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="NombreRegion" Title="Región" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="ActivoString" Title="Activo" Filterable=false Sortable=false TextAlign="TextAlign.Center" />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="TbBencineraId" Title="Editar" Filterable=false Sortable=false Width="75px">
 									<Template Context="data">
 										<RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="drive_file_rename_outline" class="m-1" Click=@(() => EditarForm(data)) />
 									</Template>
 								</RadzenDataGridColumn>
-								<RadzenDataGridColumn TItem="TbTipoCargaModel" Property="TbTipoCargaId" Title="Eliminar" Filterable=false Sortable=false Width="75px">
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="TbBencineraId" Title="Eliminar" Filterable=false Sortable=false Width="75px">
 									<Template Context="data">
 										<RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter" Icon="delete_sweep" class="m-1" Click=@(() => ShowDeleteDialog(data)) />
 									</Template>
@@ -69,22 +70,36 @@
 	</div>
 </div>
 
-<Modal @ref="modal" Title="Tipo carga" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
+<Modal @ref="modal" Title="Bencinera" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
 	<BodyTemplate>
-		<RadzenTemplateForm TItem="TbTipoCargaModel" Data="@TipoCargaSeleccionado" Submit="OnSubmit">
+		<RadzenTemplateForm TItem="TbBencineraModel" Data="@BencineraSeleccionada" Submit="OnSubmit">
+			<RadzenRow Style="padding: 5px">
+				<RadzenColumn Size="12" SizeMD="2">
+					<RadzenLabel Component="lblOrigen" Text="Empresa:"></RadzenLabel>
+				</RadzenColumn>
+				<RadzenColumn Size="12" SizeMD="3">
+					<RadzenDropDown @bind-Value="@(BencineraSeleccionada.TbEmpresaBencineraId)" Data=@oListaRegiones
+									TextProperty="@nameof(TbBencineraEmpresa.Nombre)"
+									ValueProperty="@nameof(TbBencineraEmpresa.TbBencineraEmpresaId)"
+									Disabled=@_controlesDisable
+									AllowClear=false Placeholder="Seleccione un origen de movimiento inventario" Name="DDLOrigenMovimientoInventario" />
+					<RadzenRequiredValidator Component="DDLOrigenMovimientoInventario" style="display:block;width:300px;"
+											 Text="Debe seleccionar un origen de movimento inventario" />
+				</RadzenColumn>
+			</RadzenRow>
 			<RadzenRow Style="padding: 5px">
 				<RadzenColumn Size="12" SizeMD="2">
 					<RadzenLabel Component="txtNombre" style="width: 100%; padding-left: 5px" Text="Nombre:"></RadzenLabel>
 				</RadzenColumn>
 				<RadzenColumn Size="12" SizeMD="10">
-					<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@TipoCargaSeleccionado.Nombre"></RadzenTextBox>
+					<RadzenTextBox Name="txtNombre" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@BencineraSeleccionada.Nombre"></RadzenTextBox>
 					<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
 				</RadzenColumn>
 			</RadzenRow>
 			<RadzenRow Style="padding: 5px">
 				<RadzenColumn Size="12">
 					<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
-					<RadzenCheckBox @bind-Value="@TipoCargaSeleccionado.Activo" Name="chkActivo" />
+					<RadzenCheckBox @bind-Value="@BencineraSeleccionada.Activo" Name="chkActivo" />
 				</RadzenColumn>
 			</RadzenRow>
 			<div style="text-align:right" class="col-md-12">
@@ -113,11 +128,13 @@
 
 @code {
 	private Modal modal = default!;
-	TbTipoCargaModel TipoCargaSeleccionado = new TbTipoCargaModel();
-	IEnumerable<TbTipoCargaModel?> tipoCargaGrid;
-	RadzenDataGrid<TbTipoCargaModel?> grid = null!;
+	TbBencineraModel BencineraSeleccionada = new TbBencineraModel();
+	IEnumerable<TbBencineraModel?> bencineraGrid;
+	RadzenDataGrid<TbBencineraModel?> grid = null!;
+	List<TbRegionModel> oListaRegiones = null;
 	bool isWaiting = true;
 	int count;
+	public bool _controlesDisable { get; set; }
 
 	// List<TbPerfilModel?> perfiles;
 	// List<TbPersonaModel?> personas;
@@ -137,20 +154,21 @@
 
 		// // 	userAccountModel = JsonConvert.DeserializeObject<TbUsuarioModel>(_userData);
 		// // }
-		// using (var _db = ContextFactory.CreateDbContext())
-		// {
-		// 	ubl = new TbUsuarioBL(_db);
+		using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
+		{
+			// 	ubl = new TbUsuarioBL(_db);
 
-		// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 233))
-		// 		Nav.NavigateTo("/sinacceso", true);
-		// }
+			// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 233))
+			// 		Nav.NavigateTo("/sinacceso", true);
+			oListaRegiones = await new TbRegionBL(_db).ListarByDDL();
+		}
 	}
 
 	async Task LoadData(LoadDataArgs args)
 	{
 		using (var _dbm = ContextFactoryGestionFlotas.CreateDbContext())
 		{
-			var query = new TbTipoCargaBL(_dbm).ListarAsQuerable();
+			var query = new TbBencineraBL(_dbm).ListarAsQuerable();
 
 			if (!string.IsNullOrEmpty(args.Filter))
 			{
@@ -168,31 +186,31 @@
 			count = query.Count();
 
 			// Perform paging via Skip and Take.
-			tipoCargaGrid = query.Skip(args.Skip.Value).Take(args.Top.Value).ToList();
+			bencineraGrid = query.Skip(args.Skip.Value).Take(args.Top.Value).ToList();
 		}
 		isWaiting = false;
 	}
 
-	async Task EditarForm(TbTipoCargaModel registro)
+	async Task EditarForm(TbBencineraModel registro)
 	{
 		try
 		{
 			using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
 			{
 				// ubl = new TbUsuarioBL(_db);
-				if (registro.TbTipoCargaId > 0)
+				if (registro.TbBencineraId > 0)
 				{
 					// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 16))
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
 
-					TipoCargaSeleccionado = await new TbTipoCargaBL(_db).Obtener(registro.TbTipoCargaId);
+					BencineraSeleccionada = await new TbBencineraBL(_db).Obtener(registro.TbBencineraId);
 					await modal.ShowAsync();
 				}
 				else
 				{
 					// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 15))
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
-					TipoCargaSeleccionado = registro;
+					BencineraSeleccionada = registro;
 					await modal.ShowAsync();
 				}
 			}
@@ -203,7 +221,7 @@
 		}
 	}
 
-	async Task ShowDeleteDialog(TbTipoCargaModel registro)
+	async Task ShowDeleteDialog(TbBencineraModel registro)
 	{
 		try
 		{
@@ -235,7 +253,7 @@
 						{
 							using (var _dbModules = ContextFactoryGestionFlotas.CreateDbContext())
 							{
-								await new TbTipoCargaBL(_dbModules).Eliminar(registro.TbTipoCargaId);
+								await new TbBencineraBL(_dbModules).Eliminar(registro.TbBencineraId);
 							}
 							await grid.Reload();
 							ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Registro eliminado exitosamente", Duration = 2000 });
@@ -265,11 +283,11 @@
 
 			using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
 			{
-				await new TbTipoCargaBL(_db).Guardar(TipoCargaSeleccionado);
+				await new TbBencineraBL(_db).Guardar(BencineraSeleccionada);
 				await grid.Reload();
 			}
 
-			TipoCargaSeleccionado = null;
+			BencineraSeleccionada = null;
 			ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Success, Summary = "Registro guardado exitosamente", Duration = 2000 });
 			await OnHideModalClick();
 		}
@@ -293,5 +311,6 @@
 		await modal.HideAsync();
 	}
 }
+
 
 

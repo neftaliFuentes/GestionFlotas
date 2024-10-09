@@ -69,7 +69,6 @@
 	</div>
 </div>
 
-
 <Modal @ref="modal" Title="Cargo persona" UseStaticBackdrop="true" CloseOnEscape="false" IsVerticallyCentered="true" Size="ModalSize.Large">
 	<BodyTemplate>
 		<RadzenTemplateForm TItem="TbPersonaCargoModel" Data="@CargoPersonaSeleccionado" Submit="OnSubmit">
@@ -97,6 +96,20 @@
 		</RadzenTemplateForm>
 	</BodyTemplate>
 </Modal>
+
+<script src="assets2/libs/@@popperjs/core/umd/popper.min.js"></script>
+<script src="assets2/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets2/js/defaultmenu.min.js"></script>
+<script src="assets2/libs/node-waves/waves.min.js"></script>
+<script src="assets2/js/sticky.js"></script>
+<script src="assets2/libs/simplebar/simplebar.min.js"></script>
+<script src="assets2/js/simplebar.js"></script>
+<script src="assets2/libs/@@tarekraafat/autocomplete.js/autoComplete.min.js"></script>
+<script src="assets2/libs/@@simonwep/pickr/pickr.es5.min.js"></script>
+<script src="assets2/libs/flatpickr/flatpickr.min.js"></script>
+<script src="assets2/libs/apexcharts/apexcharts.min.js"></script>
+
+<script src="assets2/js/custom.js"></script>
 
 @code {
 	private Modal modal = default!;

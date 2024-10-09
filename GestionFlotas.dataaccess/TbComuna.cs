@@ -17,6 +17,8 @@ public partial class TbComuna
 
     public virtual ICollection<TbClienteSucursal> TbClienteSucursal { get; set; } = new List<TbClienteSucursal>();
 
+    public virtual ICollection<TbMunicipalidad> TbMunicipalidad { get; set; } = new List<TbMunicipalidad>();
+
     public virtual ICollection<TbOrigenDestino> TbOrigenDestinoTbComunaDestino { get; set; } = new List<TbOrigenDestino>();
 
     public virtual ICollection<TbOrigenDestino> TbOrigenDestinoTbComunaOrigen { get; set; } = new List<TbOrigenDestino>();

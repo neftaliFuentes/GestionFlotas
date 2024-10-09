@@ -13,5 +13,7 @@ public partial class TbMunicipalidad
 
     public bool Activo { get; set; }
 
+    public virtual TbComuna TbComuna { get; set; } = null!;
+
     public virtual ICollection<TbPersona> TbPersona { get; set; } = new List<TbPersona>();
 }

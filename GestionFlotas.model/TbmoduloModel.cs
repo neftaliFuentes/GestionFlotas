@@ -1,4 +1,4 @@
-﻿ 
+﻿
 namespace GestionFlotas.model
 {
     public partial class TbmoduloModel
@@ -18,6 +18,16 @@ namespace GestionFlotas.model
         public short Orden { get; set; }
 
         public string? ActivoString { get; set; }
+
+        public List<TbModuloAccionModel> MisAcciones { get; set; }
+
+        public TbmoduloModel()
+        {
+            Activo = false;
+            MisAcciones = new List<TbModuloAccionModel>();
+        }
+
+
 
 
     }

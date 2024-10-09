@@ -18,6 +18,7 @@
 
 
 
+
 <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header border-bottom d-block p-0">
         <div class="d-flex align-items-center justify-content-between p-3">
@@ -490,7 +491,7 @@
                 <!-- Start::header-element -->
                 <div class="header-element">
                     <div class="horizontal-logo">
-                        <a href="index.html" class="header-logo">
+                        <a href="/" class="header-logo">
                             <img src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
                             <img src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
                             <img src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
@@ -1165,7 +1166,7 @@
 <aside class="app-sidebar sticky sticky-pin" id="sidebar">
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
-        <a href="index.html" class="header-logo">
+        <a href="/" class="header-logo">
             <img src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo"> <img src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark"> <img src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
         </a>
     </div>
@@ -1181,8 +1182,8 @@
                          aria-label="scrollable content" style="height: 100%; overflow: hidden scroll;">
                         <div class="simplebar-content" style="padding: 8px 0px 80px;">
                             <!-- Start::nav -->
-                            <nav class="main-menu-container nav nav-pills flex-column sub-open active open">
-                                <div class="slide-left active open d-none" id="slide-left">
+                            <nav class="main-menu-container nav nav-pills flex-column sub-open">
+                                <div class="slide-left d-none" id="slide-left">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
                                          viewBox="0 0 24 24">
                                         <path d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z">
@@ -1200,15 +1201,13 @@
                                             {
                                                 if (ModuloPadre.Activo)
                                                 {
-                                                <li class="slide has-sub active open">
+                                                <li class="slide has-sub">
                                                     <a href="javascript:void(0);"
-                                                       class="side-menu__item active open">
+                                                       class="side-menu__item">
                                                         <i class="ri-arrow-down-s-line side-menu__angle"></i>
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon"
                                                              width="32" height="32" viewBox="0 0 256 256">
-                                                            <path d="M216,115.54V208a8,8,0,0,1-8,8H160a8,8,0,0,1-8-8V160a8,8,0,0,0-8-8H112a8,8,0,0,0-8,8v48a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V115.54a8,8,0,0,1,2.62-5.92l80-75.54a8,8,0,0,1,10.77,0l80,75.54A8,8,0,0,1,216,115.54Z"
-                                                                  opacity="0.2"></path>
-                                                            <path d="M218.83,103.77l-80-75.48a1.14,1.14,0,0,1-.11-.11,16,16,0,0,0-21.53,0l-.11.11L37.17,103.77A16,16,0,0,0,32,115.55V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V160h32v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V115.55A16,16,0,0,0,218.83,103.77ZM208,208H160V160a16,16,0,0,0-16-16H112a16,16,0,0,0-16,16v48H48V115.55l.11-.1L128,40l79.9,75.43.11.1Z">
+                                                            <path d="@ModuloPadre.Icono">
                                                             </path>
                                                         </svg>
                                                         <span class="side-menu__label">@ModuloPadre.Nombre</span>
@@ -1227,40 +1226,35 @@
                                                                         if (ModuloHijos.PadreId == ModuloPadre.TbModuloId)
                                                                         {
 
-                                                                        <li class="slide has-sub open">
+                                                                        <li class="slide has-sub">
                                                                             <a href="javascript:void(0);" class="side-menu__item">
                                                                                     @ModuloHijos.Nombre
-                                                                                <i class="ri-arrow-down-s-line side-menu__angle">
-                                                                                </i>
+
                                                                             </a>
                                                                             <ul class="slide-menu child3" style="display: block; box-sizing: border-box;">
                                                                                 <li class="slide">
-                                                                                @if (ListaModulosNietos != null)
-                                                                                {
-                                                                                    foreach (TbmoduloModel ModuloNietos in ListaModulosNietos)
-                                                                                    {
-                                                                                        if (ModuloNietos.Activo)
+                                                                                        @if (ModuloHijos.MisAcciones.Count > 0)
                                                                                         {
-                                                                                            if (ModuloNietos.PadreId == ModuloHijos.TbModuloId)
+                                                                                            foreach (TbModuloAccionModel ModuloNietos in ModuloHijos.MisAcciones)
                                                                                             {
-                                                                                          
-                                                                                                    <a href="javascript:void(0);" class="side-menu__item">
+                                                                                                if (ModuloNietos.Activo)
+                                                                                                {
+                                                                                                    if (ModuloNietos.TbModuloId == ModuloHijos.TbModuloId)
+                                                                                                    {
+
+                                                                                                    <a href=@ModuloNietos.Url class="side-menu__item">
                                                                                                             @ModuloNietos.Nombre
                                                                                                     </a>
-                                                                                              
+
+                                                                                                    }
+                                                                                                }
                                                                                             }
                                                                                         }
-                                                                                    }
-                                                                                }
                                                                                 </li>
                                                                             </ul>
-
                                                                         </li>
-
-
                                                                         }
                                                                     }
-
                                                                 }
                                                             }
                                                     </ul>
@@ -1320,13 +1314,14 @@
 <script src="assets2/js/custom.js"></script>
 
 
+
 @code {
 
     IEnumerable<TbmoduloModel?> ListaModulosActivos;
 
     IEnumerable<TbmoduloModel?> ListaModulosPadre;
     IEnumerable<TbmoduloModel?> ListaModulosHijos;
-    IEnumerable<TbmoduloModel?> ListaModulosNietos;
+    IEnumerable<TbModuloAccionModel?> ListaModulosNietos;
 
     protected override async Task OnInitializedAsync()
     {
@@ -1339,16 +1334,16 @@
 
             ListaModulosPadre = (from P in ListaModulosActivos
                                  where P.PadreId == 0 && P.Activo == true
-                                 select P).ToList();
+                                 select P).ToList().OrderBy(P => P.Orden);
 
-            ListaModulosHijos = (from P in ListaModulosActivos
-                                 where P.PadreId > 0 && P.EsPadre == true && P.Activo == true
-                                 select P).ToList();
+            ListaModulosHijos = (from H in ListaModulosActivos
+                                 where H.PadreId > 0 && H.EsPadre == true && H.Activo == true
+                                 select H).ToList().OrderBy(H => H.Orden);
 
-            ListaModulosNietos = (from P in ListaModulosActivos
-                                  where P.PadreId > 0 && P.EsPadre == false && P.Activo == true
-                                  select P).ToList();
-
+            foreach (TbmoduloModel modulo in ListaModulosHijos)
+            {
+                modulo.MisAcciones = await new TbModuloAccionBL(_dbGF).ObtenerListByTbModuloId(modulo.TbModuloId);
+            }
 
         }
 

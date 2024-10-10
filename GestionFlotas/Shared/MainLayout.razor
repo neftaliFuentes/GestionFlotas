@@ -15,8 +15,12 @@
 @inject NotificationService NotificationService
 @inject DialogService DialogService
 @inject IJSRuntime JSRuntime
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager Nav
+@inject IConfiguration Configuration
 
-
+@* <AuthorizeView>
+    <Authorized> *@
 
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
@@ -491,7 +495,7 @@
                 <!-- Start::header-element -->
                 <div class="header-element">
                     <div class="horizontal-logo">
-                        <a href="/" class="header-logo">
+                        <a href="/Home" class="header-logo">
                             <img src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo">
                             <img src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
                             <img src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark">
@@ -864,9 +868,9 @@
                     </div>
         </div>
 </div>
-                                </div>
+        </div>
 <div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div>
-                            </div>
+        </div>
 <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
     <div class="simplebar-scrollbar" style="width: 0px; display: none;">
     </div>
@@ -875,7 +879,7 @@
     <div class="simplebar-scrollbar" style="height: 0px; display: none;">
     </div>
 </div>
-                        </ul>
+        </ul>
 <div class="p-3 empty-header-item border-top">
     <div class="d-flex align-items-center justify-content-between mb-3">
         <div class="fw-medium fs-14">Total :</div>
@@ -894,8 +898,8 @@
         <h6 class="fw-medium mb-1 mt-3">Your Cart is Empty</h6> <span class="mb-3 fw-normal fs-13 d-block">Add some items to make it happy :)</span>
     </div>
 </div>
-                    </div> <!-- End::main-header-dropdown -->
-                </li> <!-- End::header-element --> <!-- Start::header-element -->
+        </div> <!-- End::main-header-dropdown -->
+        </li> <!-- End::header-element --> <!-- Start::header-element -->
 <li class="header-element notifications-dropdown d-xl-block d-none dropdown">
     <!-- Start::header-link|dropdown-toggle --> <a href="javascript:void(0);"
                                                    class="header-link dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside"
@@ -1160,13 +1164,13 @@
         </svg>
     </a> <!-- End::header-link|switcher-icon -->
 </li> <!-- End::header-element -->
-            </ul>
+        </ul>
         </div> <!-- End::main-header-container -->
-    </header> <!-- /app-header --> <!-- Start::app-sidebar -->
+        </header> <!-- /app-header --> <!-- Start::app-sidebar -->
 <aside class="app-sidebar sticky sticky-pin" id="sidebar">
     <!-- Start::main-sidebar-header -->
     <div class="main-sidebar-header">
-        <a href="/" class="header-logo">
+        <a href="/Home" class="header-logo">
             <img src="assets2/images/brand-logos/desktop-logo.png" alt="logo" class="desktop-logo"> <img src="assets2/images/brand-logos/toggle-dark.png" alt="logo" class="toggle-dark"> <img src="assets2/images/brand-logos/desktop-dark.png" alt="logo" class="desktop-dark"> <img src="assets2/images/brand-logos/toggle-logo.png" alt="logo" class="toggle-logo">
         </a>
     </div>
@@ -1295,7 +1299,21 @@
 <div class="main-content app-content">
         @Body
 </div>
-                                                    </div>
+        </div>
+<footer class="footer mt-auto py-3 bg-white text-center">
+    <div class="container">
+        <span class="text-muted">
+            Copyright © <span id="year">2024</span> <a href="javascript:void(0);" class="text-dark fw-medium">By CIA - NF Soluciones</a>   Todos los derechos reservados
+        </span>
+    </div>
+</footer> <!-- Footer End -->
+@*   </Authorized>
+        <NotAuthorized>
+        @{
+            Nav.NavigateTo("/");
+        }
+    </NotAuthorized>
+</AuthorizeView> *@
 
 
 <script src="assets2/libs/@@popperjs/core/umd/popper.min.js"></script>

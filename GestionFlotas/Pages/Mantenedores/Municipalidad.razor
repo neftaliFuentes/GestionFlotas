@@ -107,7 +107,7 @@
 				</RadzenColumn>
 			</RadzenRow>
 			<div style="text-align:right" class="col-md-12">
-				<button class="btn btn-info m-1">
+				<button class="btn btn-primary m-1">
 					<i class="bi bi-floppy"></i>
 					Guardar
 				</button>
@@ -142,7 +142,7 @@
 	int count;
 	public bool _controlesDisable { get; set; }
 	int _comunaSelecionadaId;
-
+	
 	// List<TbPerfilModel?> perfiles;
 	// List<TbPersonaModel?> personas;
 
@@ -259,12 +259,17 @@
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
 
 					MunicipalidadSeleccionada = await new TbMunicipalidadBL(_db).Obtener(registro.TbMunicipalidadId);
+
+					oComunaSeleccionada = await new TbComunaBL(_db).Obtener(MunicipalidadSeleccionada.TbComunaId);
+					_comunaSelecionadaId = oComunaSeleccionada.TbComunaId;
 					await modal.ShowAsync();
 				}
 				else
 				{
 					// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 15))
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
+					oComunaSeleccionada = new TbComunaModel();
+					_comunaSelecionadaId = 0;
 					MunicipalidadSeleccionada = registro;
 					await modal.ShowAsync();
 				}

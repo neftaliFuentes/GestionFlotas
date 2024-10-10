@@ -13,22 +13,24 @@ namespace GestionFlotas.business
 		}
 		public async Task<TbBencineraModel> Obtener(int _TbBencineraId)
 		{
-			var comuna = await (from p in _db.TbBencinera
+			var bencinera = await (from p in _db.TbBencinera
 								where p.TbBencineraId == _TbBencineraId
 								select (new TbBencineraModel
 								{
 									TbBencineraId = p.TbBencineraId,
+									TbEmpresaBencineraId = p.TbEmpresaBencineraId,
 									TbComunaId = p.TbComunaId,
 									Nombre = p.Nombre.Trim(),
 									Direccion = p.Direccion,
 									Activo = p.Activo,
 									ActivoString = p.Activo ? "SI" : "NO",
 									NombreComuna = p.TbComuna.Nombre,
-									NombreRegion = p.TbComuna.TbRegion.Nombre
+									NombreRegion = p.TbComuna.TbRegion.Nombre,
+									NombreEmpresa = p.TbEmpresaBencinera.Nombre
 								})).FirstOrDefaultAsync();
 
 
-			return comuna;
+			return bencinera;
 		}
 		public IQueryable<TbBencineraModel> ListarAsQuerable()
 		{
@@ -36,13 +38,15 @@ namespace GestionFlotas.business
 						   select (new TbBencineraModel
 						   {
 							   TbBencineraId = p.TbBencineraId,
+							   TbEmpresaBencineraId = p.TbEmpresaBencineraId,
 							   TbComunaId = p.TbComunaId,
 							   Nombre = p.Nombre.Trim(),
 							   Direccion = p.Direccion,
 							   Activo = p.Activo,
 							   ActivoString = p.Activo ? "SI" : "NO",
 							   NombreComuna = p.TbComuna.Nombre,
-							   NombreRegion = p.TbComuna.TbRegion.Nombre
+							   NombreRegion = p.TbComuna.TbRegion.Nombre,
+							   NombreEmpresa = p.TbEmpresaBencinera.Nombre
 						   })).AsQueryable();
 
 			return bencineras;
@@ -66,29 +70,31 @@ namespace GestionFlotas.business
 				//List<ErrorValidacionModel> validacionModelo = ValidadorModelBL.valida(_TbBencinera);
 				//if (validacionModelo.Count > 0) throw new Exception(string.Join("<br/>", validacionModelo.Select(x => x.Mensaje)));
 
-				TbBencinera oComuna = null;
+				TbBencinera oBencinera = null;
 				if (_TbBencinera.TbBencineraId == 0)
 				{
-					oComuna = new TbBencinera
+					oBencinera = new TbBencinera
 					{
+						TbEmpresaBencineraId = _TbBencinera.TbEmpresaBencineraId,
 						TbComunaId = _TbBencinera.TbComunaId,
 						Direccion = _TbBencinera.Direccion,
 						Nombre = _TbBencinera.Nombre,
 						Activo = _TbBencinera.Activo,
 					};
-					_db.Add(oComuna);
+					_db.Add(oBencinera);
 				}
 				else
 				{
-					oComuna = await _db.TbBencinera.Where(x => x.TbBencineraId == _TbBencinera.TbBencineraId).FirstAsync();
-					if (oComuna == null) throw new Exception($"Comuna no existe para el ID: {_TbBencinera.TbBencineraId}");
+					oBencinera = await _db.TbBencinera.Where(x => x.TbBencineraId == _TbBencinera.TbBencineraId).FirstAsync();
+					if (oBencinera == null) throw new Exception($"Bencinera no existe para el ID: {_TbBencinera.TbBencineraId}");
 
-					oComuna.TbComunaId = _TbBencinera.TbComunaId;
-					oComuna.Direccion = _TbBencinera.Direccion;
-					oComuna.Nombre = _TbBencinera.Nombre;
-					oComuna.Activo = _TbBencinera.Activo;
+					oBencinera.TbEmpresaBencineraId = _TbBencinera.TbEmpresaBencineraId;
+					oBencinera.TbComunaId = _TbBencinera.TbComunaId;
+					oBencinera.Direccion = _TbBencinera.Direccion;
+					oBencinera.Nombre = _TbBencinera.Nombre;
+					oBencinera.Activo = _TbBencinera.Activo;
 
-					_db.Update(oComuna);
+					_db.Update(oBencinera);
 				}
 				await _db.SaveChangesAsync();
 			}
@@ -107,7 +113,7 @@ namespace GestionFlotas.business
 			catch (Exception ex)
 			{
 				if (ex.Message.ToUpper().Contains("CONSTRAI"))
-					throw new Exception("No se puede eliminar el registro comuna porque esta siendo utilizado en el sistema");
+					throw new Exception("No se puede eliminar el registro bencinera porque esta siendo utilizado en el sistema");
 				else
 					throw;
 			}

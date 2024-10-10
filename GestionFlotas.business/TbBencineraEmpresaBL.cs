@@ -1,8 +1,6 @@
 ﻿using GestionFlotas.model;
 using GestionFlotas.dataaccess;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System;
 
 namespace GestionFlotas.business
 {

@@ -49,7 +49,9 @@
 							<Columns>
 								<RadzenDataGridColumn TItem="TbBencineraModel" Property=" TbBencineraId" Filterable="false" Resizable="false" Title="ID" Visible="false" />
 								<RadzenDataGridColumn TItem="TbBencineraModel" Property="Nombre" Title="Nombre" Filterable=false Sortable=false />
-								<RadzenDataGridColumn TItem="TbBencineraModel" Property="NombreRegion" Title="Región" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="NombreEmpresa" Title="Empresa" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="Direccion" Title="Dirección" Filterable=false Sortable=false />
+								<RadzenDataGridColumn TItem="TbBencineraModel" Property="NombreComuna" Title="Comuna" Filterable=false Sortable=false />
 								<RadzenDataGridColumn TItem="TbBencineraModel" Property="ActivoString" Title="Activo" Filterable=false Sortable=false TextAlign="TextAlign.Center" />
 								<RadzenDataGridColumn TItem="TbBencineraModel" Property="TbBencineraId" Title="Editar" Filterable=false Sortable=false Width="75px">
 									<Template Context="data">
@@ -75,16 +77,16 @@
 		<RadzenTemplateForm TItem="TbBencineraModel" Data="@BencineraSeleccionada" Submit="OnSubmit">
 			<RadzenRow Style="padding: 5px">
 				<RadzenColumn Size="12" SizeMD="2">
-					<RadzenLabel Component="lblOrigen" Text="Empresa:"></RadzenLabel>
+					<RadzenLabel Component="lblEmpresa" Text="Empresa:"></RadzenLabel>
 				</RadzenColumn>
-				<RadzenColumn Size="12" SizeMD="3">
-					<RadzenDropDown @bind-Value="@(BencineraSeleccionada.TbEmpresaBencineraId)" Data=@oListaRegiones
+				<RadzenColumn Size="12" SizeMD="10">
+					<RadzenDropDown @bind-Value="@(BencineraSeleccionada.TbEmpresaBencineraId)" Data=@oListaEpresasBencineras
 									TextProperty="@nameof(TbBencineraEmpresa.Nombre)"
 									ValueProperty="@nameof(TbBencineraEmpresa.TbBencineraEmpresaId)"
 									Disabled=@_controlesDisable
-									AllowClear=false Placeholder="Seleccione un origen de movimiento inventario" Name="DDLOrigenMovimientoInventario" />
-					<RadzenRequiredValidator Component="DDLOrigenMovimientoInventario" style="display:block;width:300px;"
-											 Text="Debe seleccionar un origen de movimento inventario" />
+									AllowClear=false Placeholder="Seleccione una empresa" Name="DDLEmpresaBencinera" />
+					<RadzenRequiredValidator Component="DDLEmpresaBencinera" style="display:block;width:300px;"
+											 Text="Debe seleccionar una empresa" />
 				</RadzenColumn>
 			</RadzenRow>
 			<RadzenRow Style="padding: 5px">
@@ -97,13 +99,39 @@
 				</RadzenColumn>
 			</RadzenRow>
 			<RadzenRow Style="padding: 5px">
+				<RadzenColumn Size="12" SizeMD="2">
+					<RadzenLabel Component="LblDireccion" style="width: 100%; padding-left: 5px" Text="Dirección:"></RadzenLabel>
+				</RadzenColumn>
+				<RadzenColumn Size="12" SizeMD="10">
+					<RadzenTextBox Name="txtdireccion" style="width: 100%" Trim="true" AutoCompleteType="Radzen.Blazor.AutoCompleteType.Off" MaxLength="155" Placeholder="Ingrese nombre..." @bind-Value="@BencineraSeleccionada.Direccion"></RadzenTextBox>
+					<RadzenRequiredValidator Component="txtNombre" style="display:block;width:200px;" Text="Ingrese nombre" Popup="true"></RadzenRequiredValidator>
+				</RadzenColumn>
+			</RadzenRow>
+			<RadzenRow Style="padding: 5px">
+				<RadzenColumn Size="12" SizeMD="2">
+					<RadzenLabel Component="lblOrigen" Text="Comuna:"></RadzenLabel>
+				</RadzenColumn>
+				<RadzenColumn Size="12" SizeMD="6">
+					<RadzenFormField Style="width: 100%;" Visible="true">
+						<BlazorBootstrap.AutoComplete @bind-Value="oComunaSeleccionada.Nombre"
+													  TItem="TbComunaModel"
+													  DataProvider="ComunaDataProvider"
+													  PropertyName="Nombre"
+													  Placeholder="Ingrese nombre de la comuna..."
+													  LoadingText="Espere un momento cargando información..."
+													  EmptyText="No se encontraron registros...."
+													  OnChanged="(TbComunaModel comuna) => OnAutoCompleteChangedComuna(comuna)" />
+					</RadzenFormField>
+				</RadzenColumn>
+			</RadzenRow>
+			<RadzenRow Style="padding: 5px">
 				<RadzenColumn Size="12">
 					<RadzenLabel Text="Activo" Component="chkActivo" Style="margin-left: 8px; vertical-align: middle;" />
 					<RadzenCheckBox @bind-Value="@BencineraSeleccionada.Activo" Name="chkActivo" />
 				</RadzenColumn>
 			</RadzenRow>
 			<div style="text-align:right" class="col-md-12">
-				<button class="btn btn-info m-1">
+				<button class="btn btn-primary m-1">
 					<i class="bi bi-floppy"></i>
 					Guardar
 				</button>
@@ -131,9 +159,12 @@
 	TbBencineraModel BencineraSeleccionada = new TbBencineraModel();
 	IEnumerable<TbBencineraModel?> bencineraGrid;
 	RadzenDataGrid<TbBencineraModel?> grid = null!;
-	List<TbRegionModel> oListaRegiones = null;
+	List<TbBencineraEmpresaModel> oListaEpresasBencineras = null;
+	IEnumerable<TbComunaModel> Comunas;
+	TbComunaModel? oComunaSeleccionada;
 	bool isWaiting = true;
 	int count;
+	int _comunaSelecionadaId;
 	public bool _controlesDisable { get; set; }
 
 	// List<TbPerfilModel?> perfiles;
@@ -160,7 +191,9 @@
 
 			// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 233))
 			// 		Nav.NavigateTo("/sinacceso", true);
-			oListaRegiones = await new TbRegionBL(_db).ListarByDDL();
+			oListaEpresasBencineras = await new TbBencineraEmpresaBL(_db).ListarByDDL();
+			Comunas = await new TbComunaBL(_db).ListarByDDL();
+			oComunaSeleccionada = new TbComunaModel();
 		}
 	}
 
@@ -191,6 +224,51 @@
 		isWaiting = false;
 	}
 
+	private async Task<AutoCompleteDataProviderResult<TbComunaModel>> ComunaDataProvider(AutoCompleteDataProviderRequest<TbComunaModel> request)
+	{
+		if (Comunas is null)
+			using (var _dbMain = ContextFactoryGestionFlotas.CreateDbContext())
+			{
+				Comunas = await new TbComunaBL(_dbMain).ListarByDDL();
+			}
+
+		return await Task.FromResult(request.ApplyTo(Comunas.OrderBy(x => x.Nombre)));
+	}
+
+	private async void OnAutoCompleteChangedComuna(TbComunaModel oComuna)
+	{
+		if (oComuna == null)
+		{
+			using (var _dbMod = ContextFactoryGestionFlotas.CreateDbContext())
+			{
+				Comunas = await new TbComunaBL(_dbMod).ListarByDDL();
+			}
+
+			oComunaSeleccionada = new TbComunaModel();
+			_comunaSelecionadaId = 0;
+			return;
+		}
+
+		if (oComuna.TbComunaId > 0)
+		{
+			oComunaSeleccionada = oComuna;
+			_comunaSelecionadaId = oComuna.TbComunaId;
+
+			await InvokeAsync(StateHasChanged);
+		}
+
+		// if (oComuna == null)
+		// {
+		// 	return;
+		// }
+
+		// if (oComuna.TbComunaId > 0)
+		// {
+		// 	oComunaSeleccionada = oComuna;
+		// 	InvokeAsync(StateHasChanged);
+		// }
+	}
+
 	async Task EditarForm(TbBencineraModel registro)
 	{
 		try
@@ -204,12 +282,18 @@
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
 
 					BencineraSeleccionada = await new TbBencineraBL(_db).Obtener(registro.TbBencineraId);
+
+					oComunaSeleccionada = await new TbComunaBL(_db).Obtener(BencineraSeleccionada.TbComunaId);
+					_comunaSelecionadaId = oComunaSeleccionada.TbComunaId;
+
 					await modal.ShowAsync();
 				}
 				else
 				{
 					// 	if (!ubl.TengoAccesoAccion(userAccountModel.TbPerfilId, 15))
 					// 		throw new Exception("Usted no tiene acceso para realizar esta operación");
+					oComunaSeleccionada = new TbComunaModel();
+					_comunaSelecionadaId = 0;
 					BencineraSeleccionada = registro;
 					await modal.ShowAsync();
 				}
@@ -283,6 +367,7 @@
 
 			using (var _db = ContextFactoryGestionFlotas.CreateDbContext())
 			{
+				BencineraSeleccionada.TbComunaId = _comunaSelecionadaId;
 				await new TbBencineraBL(_db).Guardar(BencineraSeleccionada);
 				await grid.Reload();
 			}

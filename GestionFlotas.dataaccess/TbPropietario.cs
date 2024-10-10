@@ -15,5 +15,7 @@ public partial class TbPropietario
 
     public string? RazonSocial { get; set; }
 
+    public bool Activo { get; set; }
+
     public virtual ICollection<TbVehiculo> TbVehiculo { get; set; } = new List<TbVehiculo>();
 }

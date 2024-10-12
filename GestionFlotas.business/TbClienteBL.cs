@@ -1,6 +1,7 @@
 ﻿using GestionFlotas.model;
 using GestionFlotas.dataaccess;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace GestionFlotas.business
 {
@@ -28,6 +29,25 @@ namespace GestionFlotas.business
 									 })).FirstOrDefaultAsync();
 
 
+			return cliente;
+		}
+		public async Task<TbClienteModel> ObtenerConSucursal(int _TbClienteId)
+		{
+			var cliente = await (from p in _db.TbCliente
+								 where p.TbClienteId == _TbClienteId
+								 select (new TbClienteModel
+								 {
+									 TbClienteId = p.TbClienteId,
+									 Rut = p.Rut,
+									 Digito = p.Digito,
+									 Nombre = p.Nombre.Trim(),
+									 RazonSocial = p.RazonSocial,
+									 Activo = p.Activo,
+									 ActivoString = p.Activo ? "SI" : "NO",
+									 RutFormatado = string.Format("{0}-{1}", p.Rut, p.Digito)
+								 })).FirstOrDefaultAsync();
+
+			cliente.MisSucursales = await new TbClienteSucursalBL(_db).ListarByClienteId(_TbClienteId);
 			return cliente;
 		}
 		public IQueryable<TbClienteModel> ListarAsQuerable()

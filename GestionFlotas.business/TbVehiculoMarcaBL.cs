@@ -13,7 +13,7 @@ namespace GestionFlotas.business
 		}
 		public async Task<TbVehiculoMarcaModel> Obtener(int _TbVehiculoMarcaId)
 		{
-			var tipo = await (from p in _db.TbVehiculoMarca
+			var marca = await (from p in _db.TbVehiculoMarca
 							  where p.TbVehiculoMarcaId == _TbVehiculoMarcaId
 							  select (new TbVehiculoMarcaModel
 							  {
@@ -24,11 +24,28 @@ namespace GestionFlotas.business
 							  })).FirstOrDefaultAsync();
 
 
-			return tipo;
+			return marca;
 		}
+
+		public async Task<TbVehiculoMarcaModel> ObtenerConModelos(short _TbVehiculoMarcaId)
+		{
+			var marca = await (from p in _db.TbVehiculoMarca
+							  where p.TbVehiculoMarcaId == _TbVehiculoMarcaId
+							  select (new TbVehiculoMarcaModel
+							  {
+								  TbVehiculoMarcaId = p.TbVehiculoMarcaId,
+								  Nombre = p.Nombre.Trim(),
+								  Activo = p.Activo,
+								  ActivoString = p.Activo ? "SI" : "NO",
+							  })).FirstOrDefaultAsync();
+
+			marca.MisModelos = await new TbVehiculoModeloBL(_db).ListarByMarcaId(_TbVehiculoMarcaId);
+			return marca;
+		}
+
 		public IQueryable<TbVehiculoMarcaModel> ListarAsQuerable()
 		{
-			var tipos = (from p in _db.TbVehiculoMarca
+			var marcas = (from p in _db.TbVehiculoMarca
 						 select (new TbVehiculoMarcaModel
 						 {
 							 TbVehiculoMarcaId = p.TbVehiculoMarcaId,
@@ -37,7 +54,7 @@ namespace GestionFlotas.business
 							 ActivoString = p.Activo ? "SI" : "NO",
 						 })).AsQueryable();
 
-			return tipos;
+			return marcas;
 		}
 		public async Task Guardar(TbVehiculoMarcaModel _TbVehiculoMarca)
 		{
@@ -85,7 +102,7 @@ namespace GestionFlotas.business
 			catch (Exception ex)
 			{
 				if (ex.Message.ToUpper().Contains("CONSTRAI"))
-					throw new Exception("No se puede eliminar el registro tipo porque esta siendo utilizado en el sistema");
+					throw new Exception("No se puede eliminar el registro marca porque esta siendo utilizado en el sistema");
 				else
 					throw;
 			}
